@@ -1,0 +1,382 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4442889520BB0222004F8C02 /* PlannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442889420BB0222004F8C02 /* PlannerViewController.swift */; };
+		4442889720BB050B004F8C02 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442889620BB050B004F8C02 /* Appointment.swift */; };
+		4442889920BB150E004F8C02 /* AppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442889820BB150E004F8C02 /* AppointmentViewController.swift */; };
+		444B3F7820B08072005E0266 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444B3F7720B08072005E0266 /* AppDelegate.swift */; };
+		444B3F7A20B08072005E0266 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444B3F7920B08072005E0266 /* ViewController.swift */; };
+		444B3F7D20B08072005E0266 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 444B3F7B20B08072005E0266 /* Main.storyboard */; };
+		444B3F8020B08072005E0266 /* BeautyManager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 444B3F7E20B08072005E0266 /* BeautyManager.xcdatamodeld */; };
+		444B3F8220B08072005E0266 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 444B3F8120B08072005E0266 /* Assets.xcassets */; };
+		444B3F8520B08072005E0266 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 444B3F8320B08072005E0266 /* LaunchScreen.storyboard */; };
+		444B3FAB20B08D57005E0266 /* Planner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 444B3FAA20B08D57005E0266 /* Planner.storyboard */; };
+		444B3FAD20B0B41A005E0266 /* Tips.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 444B3FAC20B0B41A005E0266 /* Tips.storyboard */; };
+		444B3FAF20B0B47F005E0266 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 444B3FAE20B0B47F005E0266 /* Calendar.storyboard */; };
+		444B3FB120B0B5DD005E0266 /* Measurements.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 444B3FB020B0B5DD005E0266 /* Measurements.storyboard */; };
+		444B3FB520B17F2B005E0266 /* twarz_przycisk.png in Resources */ = {isa = PBXBuildFile; fileRef = 444B3FB420B17F2B005E0266 /* twarz_przycisk.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4442889420BB0222004F8C02 /* PlannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerViewController.swift; sourceTree = "<group>"; };
+		4442889620BB050B004F8C02 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
+		4442889820BB150E004F8C02 /* AppointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentViewController.swift; sourceTree = "<group>"; };
+		444B3F7420B08072005E0266 /* BeautyManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeautyManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		444B3F7720B08072005E0266 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		444B3F7920B08072005E0266 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		444B3F7C20B08072005E0266 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		444B3F7F20B08072005E0266 /* BeautyManager.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BeautyManager.xcdatamodel; sourceTree = "<group>"; };
+		444B3F8120B08072005E0266 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		444B3F8420B08072005E0266 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		444B3F8620B08072005E0266 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		444B3FAA20B08D57005E0266 /* Planner.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Planner.storyboard; sourceTree = "<group>"; };
+		444B3FAC20B0B41A005E0266 /* Tips.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tips.storyboard; sourceTree = "<group>"; };
+		444B3FAE20B0B47F005E0266 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
+		444B3FB020B0B5DD005E0266 /* Measurements.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Measurements.storyboard; sourceTree = "<group>"; };
+		444B3FB420B17F2B005E0266 /* twarz_przycisk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twarz_przycisk.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		444B3F7120B08072005E0266 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4442889B20BB1561004F8C02 /* Planner */ = {
+			isa = PBXGroup;
+			children = (
+				444B3FAA20B08D57005E0266 /* Planner.storyboard */,
+				4442889420BB0222004F8C02 /* PlannerViewController.swift */,
+				4442889820BB150E004F8C02 /* AppointmentViewController.swift */,
+				4442889620BB050B004F8C02 /* Appointment.swift */,
+			);
+			name = Planner;
+			sourceTree = "<group>";
+		};
+		444B3F6B20B08072005E0266 = {
+			isa = PBXGroup;
+			children = (
+				444B3F7620B08072005E0266 /* BeautyManager */,
+				444B3F7520B08072005E0266 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		444B3F7520B08072005E0266 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				444B3F7420B08072005E0266 /* BeautyManager.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		444B3F7620B08072005E0266 /* BeautyManager */ = {
+			isa = PBXGroup;
+			children = (
+				4442889B20BB1561004F8C02 /* Planner */,
+				444B3F7720B08072005E0266 /* AppDelegate.swift */,
+				444B3F7920B08072005E0266 /* ViewController.swift */,
+				444B3F7B20B08072005E0266 /* Main.storyboard */,
+				444B3FAC20B0B41A005E0266 /* Tips.storyboard */,
+				444B3FB420B17F2B005E0266 /* twarz_przycisk.png */,
+				444B3FAE20B0B47F005E0266 /* Calendar.storyboard */,
+				444B3FB020B0B5DD005E0266 /* Measurements.storyboard */,
+				444B3F8120B08072005E0266 /* Assets.xcassets */,
+				444B3F8320B08072005E0266 /* LaunchScreen.storyboard */,
+				444B3F8620B08072005E0266 /* Info.plist */,
+				444B3F7E20B08072005E0266 /* BeautyManager.xcdatamodeld */,
+			);
+			path = BeautyManager;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		444B3F7320B08072005E0266 /* BeautyManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 444B3F8920B08072005E0266 /* Build configuration list for PBXNativeTarget "BeautyManager" */;
+			buildPhases = (
+				444B3F7020B08072005E0266 /* Sources */,
+				444B3F7120B08072005E0266 /* Frameworks */,
+				444B3F7220B08072005E0266 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BeautyManager;
+			productName = BeautyManager;
+			productReference = 444B3F7420B08072005E0266 /* BeautyManager.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		444B3F6C20B08072005E0266 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Katarzyna Mural";
+				TargetAttributes = {
+					444B3F7320B08072005E0266 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 444B3F6F20B08072005E0266 /* Build configuration list for PBXProject "BeautyManager" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 444B3F6B20B08072005E0266;
+			productRefGroup = 444B3F7520B08072005E0266 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				444B3F7320B08072005E0266 /* BeautyManager */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		444B3F7220B08072005E0266 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				444B3FAF20B0B47F005E0266 /* Calendar.storyboard in Resources */,
+				444B3F8520B08072005E0266 /* LaunchScreen.storyboard in Resources */,
+				444B3FAD20B0B41A005E0266 /* Tips.storyboard in Resources */,
+				444B3FB520B17F2B005E0266 /* twarz_przycisk.png in Resources */,
+				444B3FAB20B08D57005E0266 /* Planner.storyboard in Resources */,
+				444B3F8220B08072005E0266 /* Assets.xcassets in Resources */,
+				444B3F7D20B08072005E0266 /* Main.storyboard in Resources */,
+				444B3FB120B0B5DD005E0266 /* Measurements.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		444B3F7020B08072005E0266 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				444B3F7A20B08072005E0266 /* ViewController.swift in Sources */,
+				4442889520BB0222004F8C02 /* PlannerViewController.swift in Sources */,
+				444B3F8020B08072005E0266 /* BeautyManager.xcdatamodeld in Sources */,
+				444B3F7820B08072005E0266 /* AppDelegate.swift in Sources */,
+				4442889720BB050B004F8C02 /* Appointment.swift in Sources */,
+				4442889920BB150E004F8C02 /* AppointmentViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		444B3F7B20B08072005E0266 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				444B3F7C20B08072005E0266 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		444B3F8320B08072005E0266 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				444B3F8420B08072005E0266 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		444B3F8720B08072005E0266 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		444B3F8820B08072005E0266 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		444B3F8A20B08072005E0266 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = BeautyManager/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = mno.BeautyManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		444B3F8B20B08072005E0266 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = BeautyManager/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = mno.BeautyManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		444B3F6F20B08072005E0266 /* Build configuration list for PBXProject "BeautyManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				444B3F8720B08072005E0266 /* Debug */,
+				444B3F8820B08072005E0266 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		444B3F8920B08072005E0266 /* Build configuration list for PBXNativeTarget "BeautyManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				444B3F8A20B08072005E0266 /* Debug */,
+				444B3F8B20B08072005E0266 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		444B3F7E20B08072005E0266 /* BeautyManager.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				444B3F7F20B08072005E0266 /* BeautyManager.xcdatamodel */,
+			);
+			currentVersion = 444B3F7F20B08072005E0266 /* BeautyManager.xcdatamodel */;
+			path = BeautyManager.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 444B3F6C20B08072005E0266 /* Project object */;
+}
