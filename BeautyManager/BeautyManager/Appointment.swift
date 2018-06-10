@@ -12,20 +12,19 @@ import UIKit
 class Appointment {
     
     var name: String
-    var date: String //dostosować do daty !! :)
+    var date: String // zastosować datePicker do wyboru daty
     var contact: String
     var address: String
-//    var image: UIImage
     var notes: String
+    var id: Int64
  
-    init(name: String, date: String, contact: String, address: String, notes: String)
+    init(id: Int64, name: String, date: String, contact: String, address: String, notes: String)
     {
         self.name = name
         self.date = date
         self.contact = contact
         self.address = address
         self.notes = notes
-        
-//        image = UIImage(named: self.name)!
+        self.id = id
     }
 }

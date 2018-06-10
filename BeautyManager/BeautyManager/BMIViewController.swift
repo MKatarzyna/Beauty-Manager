@@ -65,7 +65,7 @@ class BMIViewController: UIViewController {
         }
         else if (resultBmi > 40.0)
         {
-            descriptionBMILabel.text = "otyłóść skrajna"
+            descriptionBMILabel.text = "otyłość skrajna"
         }
     }
     

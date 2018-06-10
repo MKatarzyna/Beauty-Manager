@@ -22,6 +22,11 @@
 		444B3FAF20B0B47F005E0266 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 444B3FAE20B0B47F005E0266 /* Calendar.storyboard */; };
 		444B3FB120B0B5DD005E0266 /* Measurements.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 444B3FB020B0B5DD005E0266 /* Measurements.storyboard */; };
 		444B3FB520B17F2B005E0266 /* twarz_przycisk.png in Resources */ = {isa = PBXBuildFile; fileRef = 444B3FB420B17F2B005E0266 /* twarz_przycisk.png */; };
+		44A3745720CD5774007FF551 /* NewAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A3745620CD5774007FF551 /* NewAppointmentViewController.swift */; };
+		44A3745920CD671C007FF551 /* CoreDataOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A3745820CD671C007FF551 /* CoreDataOperations.swift */; };
+		44A3745F20CD8D39007FF551 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A3745E20CD8D39007FF551 /* CalendarViewController.swift */; };
+		44A3746320CD92C8007FF551 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A3746220CD92C8007FF551 /* DateCollectionViewCell.swift */; };
+		44A3746520CD9422007FF551 /* CalendarVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A3746420CD9422007FF551 /* CalendarVars.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +47,11 @@
 		444B3FAE20B0B47F005E0266 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		444B3FB020B0B5DD005E0266 /* Measurements.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Measurements.storyboard; sourceTree = "<group>"; };
 		444B3FB420B17F2B005E0266 /* twarz_przycisk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twarz_przycisk.png; sourceTree = "<group>"; };
+		44A3745620CD5774007FF551 /* NewAppointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAppointmentViewController.swift; sourceTree = "<group>"; };
+		44A3745820CD671C007FF551 /* CoreDataOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataOperations.swift; sourceTree = "<group>"; };
+		44A3745E20CD8D39007FF551 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		44A3746220CD92C8007FF551 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
+		44A3746420CD9422007FF551 /* CalendarVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVars.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +72,8 @@
 				4442889420BB0222004F8C02 /* PlannerViewController.swift */,
 				4442889820BB150E004F8C02 /* AppointmentViewController.swift */,
 				4442889620BB050B004F8C02 /* Appointment.swift */,
+				44A3745620CD5774007FF551 /* NewAppointmentViewController.swift */,
+				44A3745820CD671C007FF551 /* CoreDataOperations.swift */,
 			);
 			name = Planner;
 			sourceTree = "<group>";
@@ -85,21 +97,56 @@
 		444B3F7620B08072005E0266 /* BeautyManager */ = {
 			isa = PBXGroup;
 			children = (
+				44A3745D20CD7FB6007FF551 /* Measurements */,
+				44A3745C20CD7FAE007FF551 /* Calendar */,
+				44A3745B20CD7FA6007FF551 /* Main */,
+				44A3745A20CD7F9E007FF551 /* Tips */,
 				4442889B20BB1561004F8C02 /* Planner */,
-				444B3F7720B08072005E0266 /* AppDelegate.swift */,
-				444B3F7920B08072005E0266 /* ViewController.swift */,
-				444B3F7B20B08072005E0266 /* Main.storyboard */,
-				444B3FAC20B0B41A005E0266 /* Tips.storyboard */,
-				444B3FB420B17F2B005E0266 /* twarz_przycisk.png */,
-				444B3FAE20B0B47F005E0266 /* Calendar.storyboard */,
-				444B3FB020B0B5DD005E0266 /* Measurements.storyboard */,
 				444B3F8120B08072005E0266 /* Assets.xcassets */,
 				444B3F8320B08072005E0266 /* LaunchScreen.storyboard */,
 				444B3F8620B08072005E0266 /* Info.plist */,
 				444B3F7E20B08072005E0266 /* BeautyManager.xcdatamodeld */,
-				4436CB1020CAF62B00FB7E9F /* BMIViewController.swift */,
 			);
 			path = BeautyManager;
+			sourceTree = "<group>";
+		};
+		44A3745A20CD7F9E007FF551 /* Tips */ = {
+			isa = PBXGroup;
+			children = (
+				444B3FB420B17F2B005E0266 /* twarz_przycisk.png */,
+				444B3FAC20B0B41A005E0266 /* Tips.storyboard */,
+			);
+			name = Tips;
+			sourceTree = "<group>";
+		};
+		44A3745B20CD7FA6007FF551 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				444B3F7720B08072005E0266 /* AppDelegate.swift */,
+				444B3F7920B08072005E0266 /* ViewController.swift */,
+				444B3F7B20B08072005E0266 /* Main.storyboard */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		44A3745C20CD7FAE007FF551 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				444B3FAE20B0B47F005E0266 /* Calendar.storyboard */,
+				44A3745E20CD8D39007FF551 /* CalendarViewController.swift */,
+				44A3746220CD92C8007FF551 /* DateCollectionViewCell.swift */,
+				44A3746420CD9422007FF551 /* CalendarVars.swift */,
+			);
+			name = Calendar;
+			sourceTree = "<group>";
+		};
+		44A3745D20CD7FB6007FF551 /* Measurements */ = {
+			isa = PBXGroup;
+			children = (
+				4436CB1020CAF62B00FB7E9F /* BMIViewController.swift */,
+				444B3FB020B0B5DD005E0266 /* Measurements.storyboard */,
+			);
+			name = Measurements;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,7 +226,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44A3745F20CD8D39007FF551 /* CalendarViewController.swift in Sources */,
+				44A3746320CD92C8007FF551 /* DateCollectionViewCell.swift in Sources */,
+				44A3745920CD671C007FF551 /* CoreDataOperations.swift in Sources */,
+				44A3746520CD9422007FF551 /* CalendarVars.swift in Sources */,
 				444B3F7A20B08072005E0266 /* ViewController.swift in Sources */,
+				44A3745720CD5774007FF551 /* NewAppointmentViewController.swift in Sources */,
 				4436CB1120CAF62B00FB7E9F /* BMIViewController.swift in Sources */,
 				4442889520BB0222004F8C02 /* PlannerViewController.swift in Sources */,
 				444B3F8020B08072005E0266 /* BeautyManager.xcdatamodeld in Sources */,

@@ -10,8 +10,6 @@ import UIKit
 import CoreData
 
 class AppointmentViewController: UIViewController {
-
-    
     @IBOutlet weak var nameOfVisitTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var contactTextField: UITextField!
@@ -20,131 +18,69 @@ class AppointmentViewController: UIViewController {
     
     var appointment: Appointment?
     let dateFormatter = DateFormatter()
-    
-    @IBAction func saveAppointment(_ sender: Any) {
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        
-        let entity = NSEntityDescription.entity(forEntityName: "AppointmentEntity", in: context)
-        let newAppointment = NSManagedObject(entity: entity!, insertInto: context)
-        
-        let dateString = dateTextField.text
-        
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let dateFromString = dateFormatter.date(from: dateString!)
-        
-        newAppointment.setValue(nameOfVisitTextField.text, forKey: "name")
-        newAppointment.setValue(dateFromString, forKey: "date")
-        newAppointment.setValue(contactTextField.text, forKey: "contact")
-        newAppointment.setValue(addressTextField.text, forKey: "address")
-        newAppointment.setValue(notesTextView.text, forKey: "notes")
-        
-        do {
-            try context.save()
-        } catch {
-            print("Failed saving")
-        }
-    }
-    
-//    class func deleteAppointment(appointmentValue: AppointmentEntity) -> Bool{
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let context = appDelegate.persistentContainer.viewContext
-//
-//        context.delete(appointmentValue)
-//        do {
-//            try context.save()
-//            return true
-//        } catch {
-//            return false
-//        }
-//    }
-    
-    func deleteAppointment(name: String){
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "AppointmentEntity")
-        request.returnsObjectsAsFaults = false
-        
-        let predicate = NSPredicate(format: "name == %@", name)
-        request.predicate = predicate
-        
-        let result = try? context.fetch(request)
-        let resultData = result as! [AppointmentEntity]
-        
-        for object in resultData {
-            context.delete(object)
-        }
-        
-        do {
-            try context.save()
-            print("saved!")
-        }
-        catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)")
-        }
-    }
+    var currentAppointmentID: Int64 = 0
     
     
+    // przycisk usuwający jedną wizytę z DB
     @IBAction func removeAppointment(_ sender: Any) {
-        deleteAppointment(name: "paznokcie3")
+        
+        CoreDataOperations().removeAppointment(
+            id: currentAppointmentID,
+            nameValue: nameOfVisitTextField.text!,
+            dateValue: dateTextField.text!,
+            contactValue: contactTextField.text!,
+            addressValue: addressTextField.text!,
+            notesValue: notesTextView.text!)
+        
+        print("Appointment removed")
+        navigateToPreviousView()
     }
     
+    // zapisanie zedytowanych pól w jednej wizycie w DB
     @IBAction func modifyAppointment(_ sender: Any) {
-        editAppointment(name: "paznokcie4")
-    }
-    
-    func editAppointment(name: String){
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "AppointmentEntity")
-        request.returnsObjectsAsFaults = false
+        let nameValue = nameOfVisitTextField.text
+        let dateValue = dateTextField.text
+        let contactValue = contactTextField.text
+        let addressValue = addressTextField.text
+        let notesValue = notesTextView.text
         
-        let predicate = NSPredicate(format: "name == %@", name)
-        request.predicate = predicate
+        if !(nameValue?.isEmpty)! &&
+            !(dateValue?.isEmpty)! &&
+            !(contactValue?.isEmpty)! &&
+            !(addressValue?.isEmpty)! &&
+            !(notesValue?.isEmpty)! {
         
-        let result = try? context.fetch(request)
-        let resultData = result as! [AppointmentEntity]
-        
-        if resultData.count != 0{
-           // for object in resultData {
-            let dateString = dateTextField.text
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            let dateFromString = dateFormatter.date(from: dateString!)
+        CoreDataOperations().modifyAppointment(
+            id: currentAppointmentID,
+            nameValue: nameOfVisitTextField.text!,
+            dateValue: dateTextField.text!,
+            contactValue: contactTextField.text!,
+            addressValue: addressTextField.text!,
+            notesValue: notesTextView.text!)
             
-            resultData[0].setValue(nameOfVisitTextField.text, forKey: "name")
-            resultData[0].setValue(dateFromString, forKey: "date")
-            resultData[0].setValue(contactTextField.text, forKey: "contact")
-            resultData[0].setValue(addressTextField.text, forKey: "address")
-            resultData[0].setValue(notesTextView.text, forKey: "notes")
-          //  }
-            
-            do {
-                try context.save()
-                print("saved!")
-            } catch let error as NSError  {
-                print("Could not save \(error), \(error.userInfo)")
-            }
+        print("Appointment modified")
+        navigateToPreviousView()
         }
-        
-        
+        else {
+            print("Please populate all fields!")
+        }
+    }
+   
+    func navigateToPreviousView(){
+        navigationController?.popViewController(animated: true)
     }
     
+    // wyświeltanie danych dla zaznaczonego wiersza
     override func viewDidLoad() {
         super.viewDidLoad()
-
         nameOfVisitTextField.text = appointment?.name
         dateTextField.text = appointment?.date
         contactTextField.text = appointment?.contact
         addressTextField.text = appointment?.address
         notesTextView.text = appointment?.notes
-        
-        //AppointmentViewController.deleteAppointment(appointmentValue: appointment![1])
-        
+        currentAppointmentID = (appointment?.id)!
     }
     
-   
-
 //    override func didReceiveMemoryWarning() {
 //        super.didReceiveMemoryWarning()
 //        // Dispose of any resources that can be recreated.
@@ -161,7 +97,4 @@ class AppointmentViewController: UIViewController {
 //        // #warning Incomplete implementation, return the number of rows
 //        return 0
 //    }
-
-    
-
 }
