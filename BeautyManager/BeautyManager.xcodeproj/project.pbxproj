@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4436CB1120CAF62B00FB7E9F /* BMIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4436CB1020CAF62B00FB7E9F /* BMIViewController.swift */; };
 		4442889520BB0222004F8C02 /* PlannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442889420BB0222004F8C02 /* PlannerViewController.swift */; };
 		4442889720BB050B004F8C02 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442889620BB050B004F8C02 /* Appointment.swift */; };
 		4442889920BB150E004F8C02 /* AppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442889820BB150E004F8C02 /* AppointmentViewController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4436CB1020CAF62B00FB7E9F /* BMIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMIViewController.swift; sourceTree = "<group>"; };
 		4442889420BB0222004F8C02 /* PlannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerViewController.swift; sourceTree = "<group>"; };
 		4442889620BB050B004F8C02 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
 		4442889820BB150E004F8C02 /* AppointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				444B3F8320B08072005E0266 /* LaunchScreen.storyboard */,
 				444B3F8620B08072005E0266 /* Info.plist */,
 				444B3F7E20B08072005E0266 /* BeautyManager.xcdatamodeld */,
+				4436CB1020CAF62B00FB7E9F /* BMIViewController.swift */,
 			);
 			path = BeautyManager;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				444B3F7A20B08072005E0266 /* ViewController.swift in Sources */,
+				4436CB1120CAF62B00FB7E9F /* BMIViewController.swift in Sources */,
 				4442889520BB0222004F8C02 /* PlannerViewController.swift in Sources */,
 				444B3F8020B08072005E0266 /* BeautyManager.xcdatamodeld in Sources */,
 				444B3F7820B08072005E0266 /* AppDelegate.swift in Sources */,

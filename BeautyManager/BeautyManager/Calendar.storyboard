@@ -17,7 +17,7 @@
                     <view key="view" contentMode="scaleToFill" id="bi0-3p-Ket">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.80263584850000003" green="0.97267931699999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="4Lo-FW-E8K"/>
                     </view>
                     <navigationItem key="navigationItem" id="whg-AE-lqn"/>
