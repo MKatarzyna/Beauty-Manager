@@ -11,9 +11,34 @@
     </dependencies>
     <scenes>
         <!--Calendar View Controller-->
+        <scene sceneID="RIw-hF-MYL">
+            <objects>
+                <viewController storyboardIdentifier="CalendarViewController" id="ctp-R1-KOW" customClass="CalendarViewController" customModule="BeautyManager" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="as0-4m-ChB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7bd-M7-KCI">
+                                <rect key="frame" x="44" y="159" width="286" height="348"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="lkr-65-QHR"/>
+                    </view>
+                    <connections>
+                        <outlet property="placeholderView" destination="7bd-M7-KCI" id="dqB-kj-UXa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DaF-G1-xql" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-386.39999999999998" y="127.28635682158921"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="dzb-VN-Ccc">
             <objects>
-                <viewController storyboardIdentifier="CalendarViewController" id="9rQ-0r-cy4" customClass="CalendarViewController" customModule="BeautyManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9rQ-0r-cy4" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bi0-3p-Ket">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -62,18 +87,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2MH-86-UM0">
-                                <rect key="frame" x="313" y="92" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="nextMonth:" destination="9rQ-0r-cy4" eventType="touchUpInside" id="We9-xn-TF0"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ohw-LQ-AUx">
-                                <rect key="frame" x="16" y="92" width="46" height="30"/>
+                                <rect key="frame" x="24" y="92" width="31" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Prev"/>
                                 <connections>
                                     <action selector="previousMonth:" destination="9rQ-0r-cy4" eventType="touchUpInside" id="3zc-eg-cd6"/>
                                 </connections>
@@ -126,6 +143,14 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2MH-86-UM0">
+                                <rect key="frame" x="312" y="96" width="39" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Next"/>
+                                <connections>
+                                    <action selector="nextMonth:" destination="9rQ-0r-cy4" eventType="touchUpInside" id="We9-xn-TF0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.95199602839999997" green="0.9845712781" blue="0.98047727350000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="4Lo-FW-E8K"/>
@@ -139,7 +164,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WNM-Ae-zgW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="264.80000000000001" y="95.802098950524751"/>
+            <point key="canvasLocation" x="406" y="88"/>
         </scene>
     </scenes>
 </document>

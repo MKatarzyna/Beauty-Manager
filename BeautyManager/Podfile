@@ -1,0 +1,7 @@
+use_frameworks!
+
+target 'BeautyManager' do
+     pod 'Calendar-iOS', '~> 0.12'
+     pod 'Charts'
+     pod 'SwiftCharts', '~> 0.6.0'
+end

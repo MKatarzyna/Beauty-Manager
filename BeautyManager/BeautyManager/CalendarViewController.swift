@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import Calendar_iOS
 
 class CalendarViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var Calendar: UICollectionView!
     @IBOutlet weak var monthLabel: UILabel!
-    
+    @IBOutlet weak var placeholderView: UIView!
     
     let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     
@@ -22,32 +23,48 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     var currentMonth = String()
     
-    var numberOfEmptyBox = Int() // the number of "empty boxes" at the start of the current month
+    var numberOfEmptyBox = Int() // liczba "empty boxes"(pustych pól) na początku bieżącego miesiąca
     
-    var nextNumberOfEmptyBox = Int() // the same with above but with the next month
+    var nextNumberOfEmptyBox = Int() // to samo co wyżej ale z następnym miesiącem
     
-    var previousNumberOfEmptyBox = 0 // the same with above with the prev month
+    var previousNumberOfEmptyBox = 0 // to samo co wyżej ale z poprzednim miesiącem
     
-    var Direction = 0 // =0 if we are at the current month , = 1 if we are in a future month, =  -1 if we arer in a past month
+    var Direction = 0 // = 0 jeśli jesteśmy w bieżącym miesiącu, = 1 jeśli jesteśmy w przyszłym miesiącu, = -1 jeśli jesteśmy w poprzednim miesiącu
     
-    var positionIndex = 0 // here we will store the above vars of the empty boxes
+    var positionIndex = 0 // tutaj będziemy przechowywać powyższe zmienne pustych pól
     
-    var leapYearCounter = 2 // it's 2 because the next time February     has 29 days is in two years (it happens every 4 yeara)
+    var leapYearCounter = 2 // jest 2, bo następnym razem luty ma 29 dni to za dwa lata (zdarza się co 4 lata)
     
     var dayCounter = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        currentMonth = months[month]
-        monthLabel.text = "\(currentMonth) \(year)"
+        let calendarView = CalendarView(frame: placeholderView.bounds)
+        calendarView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        placeholderView.addSubview(calendarView)
         
-        if weekday == 0 {
-            weekday = 7
-        }
-        getStartDateDayPosition()
+        calendarView.setMode(CalendarMode.default.rawValue)
+        calendarView.shouldMarkToday = true;
+        calendarView.shouldShowHeaders = true;
+        
+        calendarView.selectionColor = UIColor(red: 45.00/255.0, green: 71.00/255.0, blue: 146.00/255.0, alpha: 1.0)
+        
+        calendarView.refresh()
+        
+//        calendarView.selectionColor = [UIColor, colorWithRed:0.203 green:0.666 blue:0.862 alpha:1.000];
+//        calendarView.fontHeaderColor = [UIColor, colorWithRed:0.203 green:0.666 blue:0.862 alpha:1.000];
+//
+//        currentMonth = months[month]
+//        monthLabel.text = "\(currentMonth) \(year)"
+//
+//        if weekday == 0 {
+//            weekday = 7
+//        }
+//        getStartDateDayPosition()
     }
     
+    // przełączanie na następny miesiąc w kalendarzu
     @IBAction func nextMonth(_ sender: UIButton) {
         
         switch currentMonth {
@@ -86,6 +103,7 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
         }
     }
     
+    // przełączanie na poprzedni miesiąc w kalendarzu
     @IBAction func previousMonth(_ sender: UIButton) {
         
         switch currentMonth {
@@ -122,9 +140,9 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
         }
     }
     
-    func getStartDateDayPosition() {    // this functions gives us the number of empty boxes
+    func getStartDateDayPosition() {    // ta funkcja daje nam liczbę pustych pól("empty boxes")
         switch Direction {
-        case 0:                         // if we are at the current month
+        case 0:                         // jeśli jesteśmy w bieżącym miesiącu
             numberOfEmptyBox = weekday
             dayCounter = day
             while dayCounter > 0 {
@@ -139,11 +157,11 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
             }
             positionIndex = numberOfEmptyBox
             
-        case 1...:                      // if we are at a future month
+        case 1...:                      // jeśli jesteśmy w przyszłym miesiącu
             nextNumberOfEmptyBox = (positionIndex + daysInMonths[month])%7
             positionIndex = nextNumberOfEmptyBox
             
-        case -1:                        // if we are at a past month
+        case -1:                        // jeśli jesteśmy w zeszłym miesiącu
             previousNumberOfEmptyBox = (7 - (daysInMonths[month] - positionIndex)%7)
             if previousNumberOfEmptyBox == 7 {
                 previousNumberOfEmptyBox = 0
@@ -162,7 +180,7 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        switch Direction {                  // it returns the number of days in the month + the number of "empty boxes" based on the direction we are going
+        switch Direction {                  // zwraca liczbę dni w miesiącu + liczbę pustych pól w zależności od kierunku, w którym idziemy
         case 0:
             return daysInMonths[month] + numberOfEmptyBox
         case 1...:
@@ -196,20 +214,20 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
             fatalError()
         }
         
-        if Int(cell.dateLabel.text!)! < 1 {  // hides every cell that is smaller than 1
+        if Int(cell.dateLabel.text!)! < 1 {  // ukrywa każdą komórkę, która jest mniejsza niż 1
             cell.isHidden = true
         }
         
-        // show thw weekend days in different color
+        // pokaż weekendowe dni w innym kolorze
         switch indexPath.row {
-        case 5,6,12,13,19,20,26,27,33,34:       // the indexes of the collectionViews that matches with the weekend days in every month (they are always the same)
+        case 5,6,12,13,19,20,26,27,33,34:       // indeksy collectionViews, które pasują do weekendowych dni w każdym miesiącu (są zawsze takie same)
             if Int(cell.dateLabel.text!)! > 0 {
-                cell.dateLabel.textColor = UIColor.lightGray
+                cell.dateLabel.textColor = UIColor.red
             }
         default:
             break
         }
-        // marks red the cell the shows the current date
+        // zaznacza pokolorowaną komórkę, pokazuje aktualną datę
         if currentMonth == months[calendar.component(.month, from: date) - 1] && year == calendar.component(.year, from: date) && indexPath.row + 1 == day + positionIndex {
             cell.backgroundColor = UIColor.green
             

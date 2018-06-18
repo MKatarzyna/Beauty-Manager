@@ -1,0 +1,26 @@
+PODS:
+  - Calendar-iOS (0.12)
+  - Charts (3.1.1):
+    - Charts/Core (= 3.1.1)
+  - Charts/Core (3.1.1)
+  - SwiftCharts (0.6.1)
+
+DEPENDENCIES:
+  - Calendar-iOS (~> 0.12)
+  - Charts
+  - SwiftCharts (~> 0.6.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Calendar-iOS
+    - Charts
+    - SwiftCharts
+
+SPEC CHECKSUMS:
+  Calendar-iOS: 7e2b1cad60ba5fbaefccb4e30a44c6fdad0cdad5
+  Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
+  SwiftCharts: 77378d6cf667e95f9c79a745b6778e66eed5339c
+
+PODFILE CHECKSUM: 6c6176b48279c788bec7752e890c41b97773bf22
+
+COCOAPODS: 1.5.2
