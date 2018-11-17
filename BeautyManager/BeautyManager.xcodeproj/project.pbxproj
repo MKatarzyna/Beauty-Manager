@@ -24,6 +24,11 @@
 		444B3FAF20B0B47F005E0266 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 444B3FAE20B0B47F005E0266 /* Calendar.storyboard */; };
 		444B3FB120B0B5DD005E0266 /* Measurements.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 444B3FB020B0B5DD005E0266 /* Measurements.storyboard */; };
 		444B3FB520B17F2B005E0266 /* twarz_przycisk.png in Resources */ = {isa = PBXBuildFile; fileRef = 444B3FB420B17F2B005E0266 /* twarz_przycisk.png */; };
+		446240E121A03A9E004E386F /* Tip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446240E021A03A9E004E386F /* Tip.swift */; };
+		446240E321A03AC6004E386F /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446240E221A03AC6004E386F /* Measurement.swift */; };
+		446240E921A04D89004E386F /* TipsUITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446240E821A04D89004E386F /* TipsUITableViewController.swift */; };
+		446240F121A0585B004E386F /* CoreDataTipsOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446240F021A0585B004E386F /* CoreDataTipsOperations.swift */; };
+		446240F321A06E69004E386F /* TipsDetailsUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446240F221A06E69004E386F /* TipsDetailsUIViewController.swift */; };
 		44A3745720CD5774007FF551 /* NewAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A3745620CD5774007FF551 /* NewAppointmentViewController.swift */; };
 		44A3745920CD671C007FF551 /* CoreDataOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A3745820CD671C007FF551 /* CoreDataOperations.swift */; };
 		44A3745F20CD8D39007FF551 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A3745E20CD8D39007FF551 /* CalendarViewController.swift */; };
@@ -56,6 +61,11 @@
 		444B3FAE20B0B47F005E0266 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		444B3FB020B0B5DD005E0266 /* Measurements.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Measurements.storyboard; sourceTree = "<group>"; };
 		444B3FB420B17F2B005E0266 /* twarz_przycisk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twarz_przycisk.png; sourceTree = "<group>"; };
+		446240E021A03A9E004E386F /* Tip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tip.swift; sourceTree = "<group>"; };
+		446240E221A03AC6004E386F /* Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
+		446240E821A04D89004E386F /* TipsUITableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsUITableViewController.swift; sourceTree = "<group>"; };
+		446240F021A0585B004E386F /* CoreDataTipsOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTipsOperations.swift; sourceTree = "<group>"; };
+		446240F221A06E69004E386F /* TipsDetailsUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsDetailsUIViewController.swift; sourceTree = "<group>"; };
 		44A3745620CD5774007FF551 /* NewAppointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAppointmentViewController.swift; sourceTree = "<group>"; };
 		44A3745820CD671C007FF551 /* CoreDataOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataOperations.swift; sourceTree = "<group>"; };
 		44A3745E20CD8D39007FF551 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +147,10 @@
 			children = (
 				444B3FB420B17F2B005E0266 /* twarz_przycisk.png */,
 				444B3FAC20B0B41A005E0266 /* Tips.storyboard */,
+				446240E021A03A9E004E386F /* Tip.swift */,
+				446240E821A04D89004E386F /* TipsUITableViewController.swift */,
+				446240F021A0585B004E386F /* CoreDataTipsOperations.swift */,
+				446240F221A06E69004E386F /* TipsDetailsUIViewController.swift */,
 			);
 			name = Tips;
 			sourceTree = "<group>";
@@ -169,6 +183,7 @@
 				4436CB1020CAF62B00FB7E9F /* BMIViewController.swift */,
 				444B3FB020B0B5DD005E0266 /* Measurements.storyboard */,
 				44B017E720D849CE00F025EE /* ChartData.swift */,
+				446240E221A03AC6004E386F /* Measurement.swift */,
 			);
 			name = Measurements;
 			sourceTree = "<group>";
@@ -320,7 +335,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				446240F121A0585B004E386F /* CoreDataTipsOperations.swift in Sources */,
 				44A3745F20CD8D39007FF551 /* CalendarViewController.swift in Sources */,
+				446240E121A03A9E004E386F /* Tip.swift in Sources */,
 				44A3746320CD92C8007FF551 /* DateCollectionViewCell.swift in Sources */,
 				44A3745920CD671C007FF551 /* CoreDataOperations.swift in Sources */,
 				44A3746520CD9422007FF551 /* CalendarVars.swift in Sources */,
@@ -329,10 +346,13 @@
 				4436CB1120CAF62B00FB7E9F /* BMIViewController.swift in Sources */,
 				4442889520BB0222004F8C02 /* PlannerViewController.swift in Sources */,
 				444B3F8020B08072005E0266 /* BeautyManager.xcdatamodeld in Sources */,
+				446240E921A04D89004E386F /* TipsUITableViewController.swift in Sources */,
 				444B3F7820B08072005E0266 /* AppDelegate.swift in Sources */,
 				4442889720BB050B004F8C02 /* Appointment.swift in Sources */,
 				4442889920BB150E004F8C02 /* AppointmentViewController.swift in Sources */,
 				44B017E820D849CE00F025EE /* ChartData.swift in Sources */,
+				446240E321A03AC6004E386F /* Measurement.swift in Sources */,
+				446240F321A06E69004E386F /* TipsDetailsUIViewController.swift in Sources */,
 				4429EA282173930A003BDDF3 /* UITabBarController.swift in Sources */,
 				4429EA26217218BD003BDDF3 /* Toast.swift in Sources */,
 			);

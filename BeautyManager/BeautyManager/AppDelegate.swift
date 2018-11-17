@@ -14,6 +14,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+
+        let hasLaunchedKey = "HasLaunched"
+        let defaults = UserDefaults.standard
+        let hasLaunched = defaults.bool(forKey: hasLaunchedKey)
+        
+        if !hasLaunched {
+            defaults.set(true, forKey: hasLaunchedKey)
+            print("WCHODZE TYLKO RAZ xD")
+            CoreDataTipsOperations().addTip(categoryValue: "Face", pictureNameValue: "face01.jpg", tipValue: "cosTam.xml", titleValue: "Jak regulowac brwi")
+        }
+        else {
+            print("WCHODZE WIELE RAZY ;>")
+        }
+        
+        return true
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

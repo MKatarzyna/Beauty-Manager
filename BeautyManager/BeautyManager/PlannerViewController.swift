@@ -75,6 +75,8 @@ class PlannerViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     // zliczenie elementów z tablicy, aby tableview wiedział ile wierszy ma wyświetlić
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("Appointment: ")
+        print(appointments.count)
         return appointments.count
     }
     
@@ -83,6 +85,7 @@ class PlannerViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = tableView.dequeueReusableCell(withIdentifier: "basicCell")
         cell?.textLabel?.text = appointments[indexPath.row].name.capitalized
 //        cell?.detailTextLabel?.text = appointments[indexPath.row].date
+        print(" basicCell ")
         return cell!
     }
     

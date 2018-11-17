@@ -29,6 +29,8 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+
 /*
     func deleteAppointment(id: Int64){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
