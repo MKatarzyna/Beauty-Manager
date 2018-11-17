@@ -1,26 +1,42 @@
 PODS:
-  - Calendar-iOS (0.12)
-  - Charts (3.1.1):
-    - Charts/Core (= 3.1.1)
-  - Charts/Core (3.1.1)
-  - SwiftCharts (0.6.1)
+  - Calendar-iOS (0.13)
+  - CalendarKit (0.5.1):
+    - DateToolsSwift
+    - Neon
+  - Charts (3.2.1):
+    - Charts/Core (= 3.2.1)
+  - Charts/Core (3.2.1)
+  - DateToolsSwift (4.0.0)
+  - Neon (0.4.0)
+  - SwiftCharts (0.6.3)
+  - Toast-Swift (4.0.0)
 
 DEPENDENCIES:
-  - Calendar-iOS (~> 0.12)
-  - Charts
-  - SwiftCharts (~> 0.6.0)
+  - Calendar-iOS (~> 0.13)
+  - CalendarKit (~> 0.5.1)
+  - Charts (~> 3.2.1)
+  - SwiftCharts (~> 0.6.3)
+  - Toast-Swift (~> 4.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Calendar-iOS
+    - CalendarKit
     - Charts
+    - DateToolsSwift
+    - Neon
     - SwiftCharts
+    - Toast-Swift
 
 SPEC CHECKSUMS:
-  Calendar-iOS: 7e2b1cad60ba5fbaefccb4e30a44c6fdad0cdad5
-  Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
-  SwiftCharts: 77378d6cf667e95f9c79a745b6778e66eed5339c
+  Calendar-iOS: a7bb0e6d2cee372e7e3de98d44d60ac7364be7f3
+  CalendarKit: c9d69204e97226a2da3e6b99dfbe35a57f205c1e
+  Charts: f122fb70b19847fa5817d018b77d6c5a2296ab25
+  DateToolsSwift: 875d97ff9e3a5d54abdd67a269b3f51c757b71ab
+  Neon: 7fb5a9327e7e57911843f608e08f4893a74deaf9
+  SwiftCharts: 1535b5e228702af2c9c4d60c2a408f2f0f579fa8
+  Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
 
-PODFILE CHECKSUM: 6c6176b48279c788bec7752e890c41b97773bf22
+PODFILE CHECKSUM: 7be519b40ce681c2e07438c8ea6da229f53dabe0
 
 COCOAPODS: 1.5.2

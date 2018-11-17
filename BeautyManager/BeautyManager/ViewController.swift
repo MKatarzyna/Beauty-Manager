@@ -17,6 +17,14 @@ class ViewController: UIViewController {
     //    deleteAppointment(id: 4)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override open var shouldAutorotate: Bool {
+        return false
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C3B1F6031CA82CEA81E440B61ABD15FE"
+               BlueprintIdentifier = "08E6581FBAE71F231AD41DCFA191950F"
                BlueprintName = "Pods-BeautyManager"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "Pods-BeautyManager.framework">

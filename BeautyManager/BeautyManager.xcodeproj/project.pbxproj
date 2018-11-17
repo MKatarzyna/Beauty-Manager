@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4429EA26217218BD003BDDF3 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429EA25217218BD003BDDF3 /* Toast.swift */; };
+		4429EA282173930A003BDDF3 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429EA272173930A003BDDF3 /* UITabBarController.swift */; };
 		4436CB1120CAF62B00FB7E9F /* BMIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4436CB1020CAF62B00FB7E9F /* BMIViewController.swift */; };
 		4442889520BB0222004F8C02 /* PlannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442889420BB0222004F8C02 /* PlannerViewController.swift */; };
 		4442889720BB050B004F8C02 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442889620BB050B004F8C02 /* Appointment.swift */; };
@@ -35,6 +37,8 @@
 		01656B18C8E8721F43A2DB84 /* Pods_BeautyManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeautyManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2774C17BB27B62286A0DDB05 /* Pods-BeautyManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeautyManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeautyManager/Pods-BeautyManager.release.xcconfig"; sourceTree = "<group>"; };
 		281F0FAAE0B6514203F92710 /* Pods-BeautyManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeautyManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeautyManager/Pods-BeautyManager.debug.xcconfig"; sourceTree = "<group>"; };
+		4429EA25217218BD003BDDF3 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		4429EA272173930A003BDDF3 /* UITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarController.swift; sourceTree = "<group>"; };
 		4436CB1020CAF62B00FB7E9F /* BMIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMIViewController.swift; sourceTree = "<group>"; };
 		4442889420BB0222004F8C02 /* PlannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerViewController.swift; sourceTree = "<group>"; };
 		4442889620BB050B004F8C02 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
@@ -72,6 +76,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4429EA242172186F003BDDF3 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				4429EA25217218BD003BDDF3 /* Toast.swift */,
+			);
+			name = General;
+			sourceTree = "<group>";
+		};
 		4442889B20BB1561004F8C02 /* Planner */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,13 +118,14 @@
 		444B3F7620B08072005E0266 /* BeautyManager */ = {
 			isa = PBXGroup;
 			children = (
+				4429EA242172186F003BDDF3 /* General */,
 				44A3745D20CD7FB6007FF551 /* Measurements */,
 				44A3745C20CD7FAE007FF551 /* Calendar */,
 				44A3745B20CD7FA6007FF551 /* Main */,
 				44A3745A20CD7F9E007FF551 /* Tips */,
-				4442889B20BB1561004F8C02 /* Planner */,
 				444B3F8120B08072005E0266 /* Assets.xcassets */,
 				444B3F8320B08072005E0266 /* LaunchScreen.storyboard */,
+				4442889B20BB1561004F8C02 /* Planner */,
 				444B3F8620B08072005E0266 /* Info.plist */,
 				444B3F7E20B08072005E0266 /* BeautyManager.xcdatamodeld */,
 			);
@@ -134,6 +147,7 @@
 				444B3F7720B08072005E0266 /* AppDelegate.swift */,
 				444B3F7920B08072005E0266 /* ViewController.swift */,
 				444B3F7B20B08072005E0266 /* Main.storyboard */,
+				4429EA272173930A003BDDF3 /* UITabBarController.swift */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -277,14 +291,22 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-BeautyManager/Pods-BeautyManager-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Calendar-iOS/Calendar_iOS.framework",
+				"${BUILT_PRODUCTS_DIR}/CalendarKit/CalendarKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/DateToolsSwift/DateToolsSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Neon/Neon.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftCharts/SwiftCharts.framework",
+				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Calendar_iOS.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CalendarKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateToolsSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Neon.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftCharts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -311,6 +333,8 @@
 				4442889720BB050B004F8C02 /* Appointment.swift in Sources */,
 				4442889920BB150E004F8C02 /* AppointmentViewController.swift in Sources */,
 				44B017E820D849CE00F025EE /* ChartData.swift in Sources */,
+				4429EA282173930A003BDDF3 /* UITabBarController.swift in Sources */,
+				4429EA26217218BD003BDDF3 /* Toast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,11 +473,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TNW5T5CD2P;
 				INFOPLIST_FILE = BeautyManager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mno.BeautyManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -464,11 +489,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TNW5T5CD2P;
 				INFOPLIST_FILE = BeautyManager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mno.BeautyManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
