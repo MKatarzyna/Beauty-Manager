@@ -44,7 +44,7 @@ class CoreDataOperations {
         }
     }
     
-    func removeAppointment(id: Int64, nameValue: String, dateValue: String, contactValue: String, addressValue: String, notesValue: String){
+    func removeAppointment(id: Int64){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "AppointmentEntity")

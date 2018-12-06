@@ -2,20 +2,20 @@
 //  TipsViewController.swift
 //  BeautyManager
 //
-//  Created by Katarzyna Mural on 17/11/2018.
+//  Created by Katarzyna Mural on 30/11/2018.
 //  Copyright © 2018 Katarzyna Mural. All rights reserved.
 //
 
-import Foundation
-import CoreData
 import UIKit
 
-class TipsViewController: UIViewController//, UITableViewDelegate, UITableViewDataSource {
-{
+class TipsViewController: UIViewController {
     
-    
+    var category:String = ""
 
-
+    @IBAction func sendDataFromFaceCategory(_ sender: Any) {
+        category = "Face"
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,14 +23,42 @@ class TipsViewController: UIViewController//, UITableViewDelegate, UITableViewDa
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        print("Where are you?!")
+//        if segue.identifier == "Face"
+//        {
+//            print("Face Category")
+//        }
+//        else if segue.identifier == "Hair"
+//        {
+//            print("Hair Category")
+//        }
+//    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "Face" {
+            if let vc = segue.destination as? TipsTableVC
+            {
+                vc.selectedCategory = "Face"
+            }
+        } else if segue.identifier == "Hair" {
+            if let vc = segue.destination as? TipsTableVC
+            {
+                vc.selectedCategory = "Hair"
+            }
+        } else if segue.identifier == "Nails" {
+            if let vc = segue.destination as? TipsTableVC
+            {
+                vc.selectedCategory = "Nails"
+            }
+        } else if segue.identifier == "Body" {
+            if let vc = segue.destination as? TipsTableVC
+            {
+                vc.selectedCategory = "Body"
+            }
+        }
+        
     }
-    */
 
 }

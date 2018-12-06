@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 import UIKit
 
-class TipsUITableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+class TipsTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
+    var selectedCategory:String = ""
+    var cellColor:UIColor = UIColor.clear
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -24,6 +24,21 @@ class TipsUITableViewController: UIViewController, UITableViewDelegate, UITableV
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        if(selectedCategory == "Face"){
+            // niebieski
+            cellColor = UIColor.init(red: 18.0/255.0, green: 158.0/255.0, blue: 236.0/255.0, alpha: 1.0)
+        } else if(selectedCategory == "Hair"){
+            // violet
+            cellColor = UIColor.init(red: 137.0/255.0, green: 118.0/255.0, blue: 241.0/255.0, alpha: 1.0)
+        } else if(selectedCategory == "Nails"){
+            // red
+            cellColor = UIColor.init(red: 253.0/255.0, green: 96.0/255.0, blue: 96.0/255.0, alpha: 1.0)
+        } else if(selectedCategory == "Body"){
+            // pink
+            cellColor = UIColor.init(red: 255.0/255.0, green: 158.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,16 +74,19 @@ class TipsUITableViewController: UIViewController, UITableViewDelegate, UITableV
                 print(tipValue)
                 print(titleValue)
                 
+                // sprawdzenie czy porada nalezy wybranej kategorii
+                if (categoryValue == selectedCategory) {
+                    // umieszczenie wartości w obiekcie tip
+                    let tip = Tip(
+                        id: idValue,
+                        category: categoryValue,
+                        pictureName: pictureNameValue,
+                        tip: tipValue,
+                        title: titleValue)
+                    // dodanie jednej wizyty do tablicy wizyt (do listy)
+                    tips.append(tip)
+                }
                 
-                // umieszczenie wartości w obiekcie tip
-                let tip = Tip(
-                    id: idValue,
-                    category: categoryValue,
-                    pictureName: pictureNameValue,
-                    tip: tipValue,
-                    title: titleValue)
-                // dodanie jednej wizyty do tablicy wizyt (do listy)
-                tips.append(tip)
             }
         } catch {
             print("Failed")
@@ -99,14 +117,18 @@ class TipsUITableViewController: UIViewController, UITableViewDelegate, UITableV
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
      performSegue(withIdentifier: "showDetails", sender: self)
      }
+    
+    // ustawienie koloru komorki w wierszu
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = cellColor
+    }
      
      // wysłanie elementu z tablicy appointments dla zaznaczonego wiersza
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     if let destination = segue.destination as? TipsDetailsUIViewController {
-     destination.tipDetailsArray = tips[(tableView.indexPathForSelectedRow?.row)!]
+        if let destination = segue.destination as? TipsDetailsVC {
+            destination.tipDetailsArray = tips[(tableView.indexPathForSelectedRow?.row)!]
+        }
      }
-     }
-     
 
    
 

@@ -51,12 +51,7 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate, UITextVi
     @IBAction func removeAppointment(_ sender: Any) {
         
         CoreDataOperations().removeAppointment(
-            id: currentAppointmentID,
-            nameValue: nameOfVisitTextField.text!,
-            dateValue: dateTextField.text!,
-            contactValue: contactTextField.text!,
-            addressValue: addressTextField.text!,
-            notesValue: notesTextView.text!)
+            id: currentAppointmentID)
         
         print("Appointment removed")
         navigateToPreviousView()
