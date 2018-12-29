@@ -7,7 +7,10 @@ PODS:
     - Charts/Core (= 3.2.1)
   - Charts/Core (3.2.1)
   - DateToolsSwift (4.0.0)
+  - DynamicBlurView (3.0.1)
   - Neon (0.4.0)
+  - PopupDialog (0.9.2):
+    - DynamicBlurView (~> 3.0.1)
   - SwiftCharts (0.6.3)
   - Toast-Swift (4.0.0)
 
@@ -15,6 +18,7 @@ DEPENDENCIES:
   - Calendar-iOS (~> 0.13)
   - CalendarKit (~> 0.5.1)
   - Charts (~> 3.2.1)
+  - PopupDialog (~> 0.9)
   - SwiftCharts (~> 0.6.3)
   - Toast-Swift (~> 4.0)
 
@@ -24,7 +28,9 @@ SPEC REPOS:
     - CalendarKit
     - Charts
     - DateToolsSwift
+    - DynamicBlurView
     - Neon
+    - PopupDialog
     - SwiftCharts
     - Toast-Swift
 
@@ -33,10 +39,12 @@ SPEC CHECKSUMS:
   CalendarKit: c9d69204e97226a2da3e6b99dfbe35a57f205c1e
   Charts: f122fb70b19847fa5817d018b77d6c5a2296ab25
   DateToolsSwift: 875d97ff9e3a5d54abdd67a269b3f51c757b71ab
+  DynamicBlurView: b1df5415f9bd31897549e5d7077e5ec120a4d636
   Neon: 7fb5a9327e7e57911843f608e08f4893a74deaf9
+  PopupDialog: f4bb461bf70ff422be0b56656566424ee9273080
   SwiftCharts: 1535b5e228702af2c9c4d60c2a408f2f0f579fa8
   Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
 
-PODFILE CHECKSUM: 7be519b40ce681c2e07438c8ea6da229f53dabe0
+PODFILE CHECKSUM: 136ebbc2a6d0cf65e500350a369992abf8ae95a4
 
 COCOAPODS: 1.5.2

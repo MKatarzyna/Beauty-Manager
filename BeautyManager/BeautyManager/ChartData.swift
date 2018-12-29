@@ -11,46 +11,164 @@ import UIKit
 import SwiftCharts
 
 class ChartData: UIViewController {
-    private var chart: Chart?
+    
+    fileprivate var chart: Chart? // arc
+    var chartType: Int64 = 0
+    var selectedDate: String = ""
+    var array = [(Int, Double)]()
+//    var maxYValue: Double = 0.0
+    var maxXValue: Double = 0.0
+    var year = ""
+    var month = ""
     
     @IBOutlet weak var chartBaseView: UIView!
+    
+//    public init() {}
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let chartConfig = BarsChartConfig(
-            valsAxisConfig: ChartAxisConfig(from: 50, to: 57, by: 1)
+        let labelSettings = ChartLabelSettings(font: ExamplesDefaults.labelFont)
+        print("Chart Type: \(chartType)")
+        print("Select Date: \(selectedDate)")
+        
+        
+//        let temporaryArray = [(1, 2), (2, 1), (3, 9), (4, 7), (5, 10), (6, 9), (7, 15), (8, 8), (9, 20), (10, 17), (11, 3), (12, 2), (13, 8), (14, 8), (15, 10.1), (16, 10.54), (17, 15), (18, 8), (19, 20), (20, 17), (21, 2), (22, 1), (23, 9), (24, 7), (25, 10), (26, 9), (27, 15), (28, 8), (29, 20), (30, 17), (31, 2)]
+        
+        let chartPoints = array.map{ChartPoint(x: ChartAxisValueDouble($0.0), y: ChartAxisValueDouble($0.1))}
+        
+        var xAxisName: String = ""
+        var multiplyUnit: Double = 0.0
+        
+        if (chartType == 0) {
+            xAxisName = "Weight [kg]"
+            multiplyUnit = 10.0
+//            maxYValue = 30.0
+//            maxYValue=maxYValue+10.0
+            
+        } else {
+            xAxisName = "BMI"
+            multiplyUnit = 2.0
+//            maxYValue = 20.0
+//            maxYValue=maxYValue+2.0
+        }
+        print(maxXValue)
+        
+        let xValues = ChartAxisValuesStaticGenerator.generateXAxisValuesWithChartPoints(chartPoints, minSegmentCount: 1, maxSegmentCount: maxXValue, multiple: 2, axisValueGenerator: {ChartAxisValueDouble($0, labelSettings: labelSettings)}, addPaddingSegmentIfEdge: false)
+        let yValues = ChartAxisValuesStaticGenerator.generateYAxisValuesWithChartPoints(chartPoints, minSegmentCount: 1, maxSegmentCount: 40.0, multiple: multiplyUnit, axisValueGenerator: {ChartAxisValueDouble($0, labelSettings: labelSettings)}, addPaddingSegmentIfEdge: true)
+        
+        let xModel = ChartAxisModel(axisValues: xValues, axisTitleLabel: ChartAxisLabel(text: "\(year)-\(month) [Day]", settings: labelSettings))
+        
+        let yModel = ChartAxisModel(axisValues: yValues, axisTitleLabel: ChartAxisLabel(text: xAxisName, settings: labelSettings.defaultVertical()))
+        let screenSize: CGRect = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
+        let chartFrame = CGRect(x: 0, y: 70, width: screenWidth, height: screenHeight - 130)
+//        CGRect(x: 0, y: 70, width: 300, height: 500)
+//        let chartFrame = ExamplesDefaults.chartFrame(view.bounds)
+        
+        var chartSettings = ExamplesDefaults.chartSettings // for now no zooming and panning here until ChartShowCoordsLinesLayer is improved to not scale the lines during zooming.
+        chartSettings.trailing = 20
+        chartSettings.labelsToAxisSpacingX = 15
+        chartSettings.labelsToAxisSpacingY = 15
+        let coordsSpace = ChartCoordsSpaceLeftBottomSingleAxis(chartSettings: chartSettings, chartFrame: chartFrame, xModel: xModel, yModel: yModel)
+        let (xAxisLayer, yAxisLayer, innerFrame) = (coordsSpace.xAxisLayer, coordsSpace.yAxisLayer, coordsSpace.chartInnerFrame)
+        
+        
+        let labelWidth: CGFloat = 70
+        let labelHeight: CGFloat = 30
+        
+        let showCoordsTextViewsGenerator = {(chartPointModel: ChartPointLayerModel, layer: ChartPointsLayer, chart: Chart) -> UIView? in
+            let (chartPoint, screenLoc) = (chartPointModel.chartPoint, chartPointModel.screenLoc)
+            let text = chartPoint.description
+            let font = ExamplesDefaults.labelFont
+            let x = min(screenLoc.x + 5, chart.bounds.width - 5)
+//            let x = min(screenLoc.x + 5, chart.bounds.width - text.width(font) - 5)
+            let view = UIView(frame: CGRect(x: x, y: screenLoc.y - labelHeight, width: labelWidth, height: labelHeight))
+            let label = UILabel(frame: view.bounds)
+            label.text = text
+            label.font = ExamplesDefaults.labelFont
+            view.addSubview(label)
+            view.alpha = 0
+            
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+                view.alpha = 1
+            }, completion: nil)
+            
+            return view
+        }
+        
+        let showCoordsLinesLayer = ChartShowCoordsLinesLayer<ChartPoint>(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints)
+        
+        let showCoordsTextLayer = ChartPointsSingleViewLayer<ChartPoint, UIView>(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, innerFrame: innerFrame, chartPoints: chartPoints, viewGenerator: showCoordsTextViewsGenerator, mode: .custom, keepOnFront: true)
+        // To preserve the offset of the notification views from the chart point they represent, during transforms, we need to pass mode: .custom along with this custom transformer.
+        showCoordsTextLayer.customTransformer = {(model, view, layer) -> Void in
+            guard let chart = layer.chart else {return}
+            
+            let text = model.chartPoint.description
+            
+            let screenLoc = layer.modelLocToScreenLoc(x: model.chartPoint.x.scalar, y: model.chartPoint.y.scalar)
+            let x = min(screenLoc.x + 5, chart.bounds.width - 5)
+//             let x = min(screenLoc.x + 5, chart.bounds.width - text.width(ExamplesDefaults.labelFont) - 5)
+            
+            view.frame.origin = CGPoint(x: x, y: screenLoc.y - labelHeight)
+        }
+        
+        let touchViewsGenerator = {(chartPointModel: ChartPointLayerModel, layer: ChartPointsLayer, chart: Chart) -> UIView? in
+            let (chartPoint, screenLoc) = (chartPointModel.chartPoint, chartPointModel.screenLoc)
+            let s: CGFloat = 30
+            let view = HandlingView(frame: CGRect(x: screenLoc.x - s/2, y: screenLoc.y - s/2, width: s, height: s))
+            view.touchHandler = {[weak showCoordsLinesLayer, weak showCoordsTextLayer, weak chartPoint, weak chart] in
+                guard let chartPoint = chartPoint, let chart = chart else {return}
+                showCoordsLinesLayer?.showChartPointLines(chartPoint, chart: chart)
+                showCoordsTextLayer?.showView(chartPoint: chartPoint, chart: chart)
+            }
+            return view
+        }
+        
+        let touchLayer = ChartPointsViewsLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, viewGenerator: touchViewsGenerator, mode: .translate, keepOnFront: true)
+        
+        let lineModel = ChartLineModel(chartPoints: chartPoints, lineColor: UIColor(red: 0.4, green: 0.4, blue: 1, alpha: 0.2), lineWidth: 3, animDuration: 0.7, animDelay: 0)
+        let chartPointsLineLayer = ChartPointsLineLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, lineModels: [lineModel])
+        
+        let circleViewGenerator = {(chartPointModel: ChartPointLayerModel, layer: ChartPointsLayer, chart: Chart) -> UIView? in
+            let circleView = ChartPointEllipseView(center: chartPointModel.screenLoc, diameter: 24)
+            circleView.animDuration = 1.5
+            circleView.fillColor = UIColor.white
+            circleView.borderWidth = 5
+            circleView.borderColor = UIColor.blue
+            return circleView
+        }
+        let chartPointsCircleLayer = ChartPointsViewsLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, viewGenerator: circleViewGenerator, displayDelay: 0, delayBetweenItems: 0.05, mode: .translate)
+        
+        let settings = ChartGuideLinesDottedLayerSettings(linesColor: UIColor.black, linesWidth: ExamplesDefaults.guidelinesWidth)
+        let guidelinesLayer = ChartGuideLinesDottedLayer(xAxisLayer: xAxisLayer, yAxisLayer: yAxisLayer, settings: settings)
+        
+        
+        let chart = Chart(
+            frame: chartFrame,
+            innerFrame: innerFrame,
+            settings: chartSettings,
+            layers: [
+                xAxisLayer,
+                yAxisLayer,
+                guidelinesLayer,
+                showCoordsLinesLayer,
+                chartPointsLineLayer,
+                chartPointsCircleLayer,
+                showCoordsTextLayer,
+                touchLayer,
+                
+                ]
         )
-        let frame = CGRect(x: 10, y: 70, width: 300, height: 500)
-        let chart = BarsChart(
-            frame: frame,
-            chartConfig: chartConfig,
-            xTitle: "Day",
-            yTitle: "Weight [kg]",
-            bars: [
-                ("Mon", 55.5),
-                ("Tue", 55.7),
-                ("Wed", 55.9),
-                ("Thu", 55.6),
-                ("Fri", 55.3),
-                ("Sat", 55.0),
-                ("Sun", 54.8)
-            ],
-            color: UIColor(red: 45.00/255.0, green: 71.00/255.0, blue: 146.00/255.0, alpha: 1.0),
-//            color: UIColor.red,
-            barWidth: 30,
-            animDuration: 0.5
-        )
-        //UIcolor.red
-//        chart.view.frame = self.chartBaseView.bounds
-        chart.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.chartBaseView.addSubview(chart.view)
+        
+        view.addSubview(chart.view)
         self.chart = chart
-        // Do any additional setup after loading the view.
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 }

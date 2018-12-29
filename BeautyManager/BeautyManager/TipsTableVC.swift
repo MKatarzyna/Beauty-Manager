@@ -45,12 +45,12 @@ class TipsTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         super.viewWillAppear(animated)
         
         tips.removeAll()
-        loadDataFromDB()
+        loadTipsDataFromDB()
         tableView.reloadData()
     }
     
     // wczytanie danych z core data
-    @objc func loadDataFromDB() {
+    @objc func loadTipsDataFromDB() {
         print("Loading...")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
@@ -131,7 +131,6 @@ class TipsTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
      }
 
    
-
 
 
 }

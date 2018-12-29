@@ -14,6 +14,10 @@
         <attribute name="resultBMI" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
+    <entity name="ShortTipEntity" representedClassName="ShortTipEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="shortTip" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="TipEntity" representedClassName="TipEntity" syncable="YES" codeGenerationType="class">
         <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -23,7 +27,8 @@
     </entity>
     <elements>
         <element name="AppointmentEntity" positionX="-63" positionY="-18" width="128" height="135"/>
-        <element name="TipEntity" positionX="-63" positionY="27" width="128" height="120"/>
         <element name="MeasurementsEntity" positionX="-54" positionY="54" width="128" height="105"/>
+        <element name="TipEntity" positionX="-63" positionY="27" width="128" height="120"/>
+        <element name="ShortTipEntity" positionX="-54" positionY="45" width="128" height="75"/>
     </elements>
 </model>

@@ -8,13 +8,28 @@
 
 import UIKit
 import CoreData
+import PopupDialog
 
 class ViewController: UIViewController {
 
+    var shortTipsArray = [ShortTips]()
+    
+    @IBAction func showMeShortTip(_ sender: Any) {
+        var sizeOfArray: Int = shortTipsArray.count
+        print(sizeOfArray)
+        let numberOfShortTip = Int.random(in: 0...(sizeOfArray - 1))
+        
+        let mainTitle = "Short tip"
+        let shortTipMessage = shortTipsArray[numberOfShortTip].shortTip
+        let popupDialog = PopupDialog(title: mainTitle, message: shortTipMessage)
+        let closeButton = CancelButton(title: "CLOSE") {}
+        popupDialog.addButtons([closeButton])
+        self.present(popupDialog, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    //    deleteAppointment(id: 4)
+        loadShortTipDataFromDB()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -29,33 +44,33 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
-/*
-    func deleteAppointment(id: Int64){
+    // pobieranie danych z bazy danych ShortTip
+    @objc func loadShortTipDataFromDB() {
+        print("Loading...")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "AppointmentEntity")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ShortTipEntity")
         request.returnsObjectsAsFaults = false
         
-        let predicate = NSPredicate(format: "id == \(id)")
-        request.predicate = predicate
-        
-        let result = try? context.fetch(request)
-        let resultData = result as! [AppointmentEntity]
-        
-        for object in resultData {
-            context.delete(object)
-        }
-        
+        // pobranie wszystkich wartości atrybutów z encji
         do {
-            try context.save()
-            print("saved!")
-        }
-        catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)")
+            print("do...")
+            let result = try context.fetch(request)
+            for data in result as! [NSManagedObject] {
+                let idValue = data.value(forKey: "id") as! Int64
+                let shortTipValue = data.value(forKey: "shortTip") as! String
+                
+                // umieszczenie wartości w obiekcie tip
+                let shortTip = ShortTips(
+                    id: idValue,
+                    shortTip: shortTipValue)
+                // dodanie jednej wizyty do tablicy wizyt (do listy)
+                shortTipsArray.append(shortTip)
+            }
+        } catch {
+            print("Failed")
         }
     }
-*/
 }
 

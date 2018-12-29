@@ -25,7 +25,7 @@ class PlannerViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewWillAppear(animated)
         
         appointments.removeAll()
-        loadDataFromDB()
+        loadPlannerDataFromDB()
         tableView.reloadData()
     }
     
@@ -35,14 +35,14 @@ class PlannerViewController: UIViewController, UITableViewDelegate, UITableViewD
 //    }
     
     // wczytanie danych z core data
-    @objc func loadDataFromDB() {
+    @objc func loadPlannerDataFromDB() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "AppointmentEntity")
         request.returnsObjectsAsFaults = false
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         // pobranie wszystkich wartości atrybutów z encji
         do {

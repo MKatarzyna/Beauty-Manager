@@ -6,4 +6,5 @@ target 'BeautyManager' do
      pod 'SwiftCharts', '~> 0.6.3'
      pod 'Toast-Swift', '~> 4.0'
      pod 'CalendarKit', '~> 0.5.1'
+     pod 'PopupDialog', '~> 0.9'
 end

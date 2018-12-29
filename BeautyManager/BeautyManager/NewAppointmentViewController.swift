@@ -49,6 +49,7 @@ class NewAppointmentViewController: UIViewController, UITextFieldDelegate, UITex
                     navigateToPreviousView()
                 } else {
                     print("Please populate all fields!")
+                    self.view.makeToast("Please populate all fields!", duration: 3.0, position: .bottom, style: style)
                 }
             } else {
                 self.view.makeToast("Please ensure the name field has correct characters (a-z, 0-9)", duration: 3.0, position: .bottom, style: style)
@@ -66,7 +67,7 @@ class NewAppointmentViewController: UIViewController, UITextFieldDelegate, UITex
         super.viewDidLoad()
         
         datePicker = UIDatePicker()
-        datePicker?.datePickerMode = .date
+        datePicker?.datePickerMode = .dateAndTime
         datePicker?.addTarget(self, action: #selector(AppointmentViewController.dateChanged(datePicker:)), for: .valueChanged)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(AppointmentViewController.viewTapped(gestureRecognize:)))
         view.addGestureRecognizer(tapGesture)
@@ -93,7 +94,7 @@ class NewAppointmentViewController: UIViewController, UITextFieldDelegate, UITex
     
     @objc func dateChanged(datePicker: UIDatePicker) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" //  HH:mm:ss
         dateTextField.text = dateFormatter.string(from: datePicker.date)
     }
     

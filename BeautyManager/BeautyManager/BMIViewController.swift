@@ -8,7 +8,8 @@
 
 import UIKit
 import Toast_Swift
-
+import CoreData
+import PopupDialog
 
 public extension UIViewController {
     public func hideKeyboardWhenTappedAround() {
@@ -26,18 +27,30 @@ class BMIViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var kgTextField: UITextField!
     @IBOutlet weak var cmTextField: UITextField!
     @IBOutlet weak var scoreBMILabel: UILabel!
-    //@IBOutlet weak var descriptionBMILabel: UILabel!
-
     @IBOutlet weak var descriptionBMILabel: UITextView!
+    @IBOutlet weak var dateTextField: UITextField!
+    
+    private var datePicker: UIDatePicker?
+    let alphabetRule: CharacterSet = ["0","1","2","3","4","5","6","7","8","9","."]
+    var kgValue: Double = 0.0
+    var resultBmi: Double = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        datePicker = UIDatePicker()
+        datePicker?.datePickerMode = .date
+        datePicker?.addTarget(self, action: #selector(BMIViewController.dateChanged(datePicker:)), for: .valueChanged)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(BMIViewController.viewTapped(gestureRecognize:)))
+        view.addGestureRecognizer(tapGesture)
+        dateTextField.inputView = datePicker
+        
         self.hideKeyboardWhenTappedAround()
         
         // use this to hide keyboard while pressing return on keyboard
         self.kgTextField.delegate = self
         self.cmTextField.delegate = self
-        
+        self.dateTextField.delegate = self
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -50,18 +63,142 @@ class BMIViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func calculateBMI(_ sender: Any) {
+    // zabezpieczenie datePickera przed wklejaniem tresci i dodawaniem innych znaków niż te podane poprzez dataPicker
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        if (kgTextField.text != "" && cmTextField.text != "")
-        {
-            if(kgTextField.text?.rangeOfCharacter(from: CharacterSet.letters) == nil &&
-                cmTextField.text?.rangeOfCharacter(from: CharacterSet.letters) == nil)
-            {
-                let kgValue = Double(kgTextField.text!)
+        if textField == dateTextField {
+            return false
+        }
+        else {
+            return true
+        }
+    }
+    
+    // handler method
+    @objc func viewTapped(gestureRecognize: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
+    @objc func dateChanged(datePicker: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateTextField.text = dateFormatter.string(from: datePicker.date)
+    }
+    
+//    private func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        self.view.endEditing(true)
+//        return false
+//    }
+    
+    func savingBMIDataToDB() {
+        
+            let currentDate: String = dateTextField.text!
+            var foundID: Int64 = 0
+            var isFind: Bool = false
+            
+            // wczytanie danych z core data
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let context = appDelegate.persistentContainer.viewContext
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MeasurementsEntity")
+            request.returnsObjectsAsFaults = false
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            
+            // pobranie wszystkich wartości atrybutów z encji
+            do {
+                let result = try context.fetch(request)
+                for data in result as! [NSManagedObject] {
+                    let idValue = data.value(forKey: "id") as! Int64
+                    let dateValue = data.value(forKey: "date") as! Date
+                    let stringDate = dateFormatter.string(from: dateValue)
+                    
+                    // sprawdzenie czy wybrana data jest w bazie
+                    if (stringDate == currentDate) {
+                        foundID = idValue
+                        isFind = true
+                        print("Znaleziono date do podmianki")
+                    }
+                }
+            } catch {
+                print("Failed")
+            }
+            
+            if (isFind == true){
+                // do modify
+                _ = MeasurementsCoreData().modifyMeasurement(id: foundID, resultBMIValue: resultBmi, weightValue: kgValue, dateValue: currentDate)
+                print("Entry modified")
+                self.view.makeToast("Entry modyfied and saved.", duration: 3.0, position: .bottom)
+            } else {
+                _ = MeasurementsCoreData().addMeasurement(resultBMIValue: resultBmi, weightValue: kgValue, dateValue: currentDate)
+                print("Entry added")
+                self.view.makeToast("Entry added and saved.", duration: 3.0, position: .bottom)
+            }
+    }
+    
+    @IBAction func saveDataBMI(_ sender: Any) {
+        if (scoreBMILabel.text != "" && dateTextField.text != "") {
+            let mainTitle = "Saving entry"
+            let question = "Do you want to save this entry?"
+            let popupDialog = PopupDialog(title: mainTitle, message: question)
+            let cancelButton = CancelButton(title: "CANCEL") {
+                print("You canceled the saving this entry.")
+                self.view.makeToast("You canceled the saving this entry.", duration: 3.0, position: .bottom)
+            }
+            let yesButton = DefaultButton(title: "YES", dismissOnTap: true) {
+                
+                self.savingBMIDataToDB()
+                
+                print("Your entry is saved.")
+    //            self.view.makeToast("Your entry is saved.", duration: 3.0, position: .bottom)
+            }
+            popupDialog.addButtons([cancelButton, yesButton])
+            self.present(popupDialog, animated: true, completion: nil)
+        } else {
+            self.view.makeToast("Please, calculate BMI value as first and choose a date.", duration: 3.0, position: .bottom)
+        }
+        
+        
+//        let finalSet = CharacterSet.decimalDigits.union(alphabetRule)
+        
+//        if (kgTextField.text != "" && cmTextField.text != "") {
+//            if (finalSet.isSuperset(of: CharacterSet(charactersIn: kgTextField.text!)) == true && finalSet.isSuperset(of: CharacterSet(charactersIn: cmTextField.text!)) == true) {
+//            }
+//        }
+//
+        
+//            _ = CoreDataOperations().addAppointment(nameValue: nameTextField.text!, dateValue: dateTextField.text!, contactValue: contactTextField.text!, addressValue: addressTextField.text!, notesValue: notesTextView.text!)
+        
+    }
+    
+    @IBAction func cleanDataBMI(_ sender: Any) {
+        let mainTitle = "Clearing all entries"
+        let question = "Do you want to clear all entries?"
+        let popupDialog = PopupDialog(title: mainTitle, message: question)
+        let cancelButton = CancelButton(title: "CANCEL") {
+            print("You canceled the clearing of entries.")
+           self.view.makeToast("You canceled the clearing of entries.", duration: 3.0, position: .bottom)
+        }
+        let yesButton = DefaultButton(title: "YES", dismissOnTap: true) {
+            _ = MeasurementsCoreData().removeAllMeasurements()
+            print("Your entries are cleared.")
+            self.view.makeToast("Your entries are cleared.", duration: 3.0, position: .bottom)
+        }
+        popupDialog.addButtons([cancelButton, yesButton])
+        self.present(popupDialog, animated: true, completion: nil)
+    }
+    
+    @IBAction func calculateBMI(_ sender: Any) {
+        let finalSet = CharacterSet.decimalDigits.union(alphabetRule)
+        
+        if (kgTextField.text != "" && cmTextField.text != "") {
+            if (finalSet.isSuperset(of: CharacterSet(charactersIn: kgTextField.text!)) == true && finalSet.isSuperset(of: CharacterSet(charactersIn: cmTextField.text!)) == true) {
+                
+                kgValue = Double(kgTextField.text!)!
                 let cmValue = Double(cmTextField.text!)
                 let mValue = Double(cmValue!/100.0)
                 
-                let resultBmi = Double(kgValue! / (mValue * mValue))
+                resultBmi = Double(kgValue / (mValue * mValue))
                 
                 scoreBMILabel.text = "Your BMI is: \(resultBmi)"
                 var result = "toast"
@@ -128,7 +265,7 @@ class BMIViewController: UIViewController, UITextFieldDelegate {
             }
             else
             {
-                self.view.makeToast("Please, use only numbers.", duration: 3.0, position: .bottom)
+                self.view.makeToast("Please, use only numbers and dot.", duration: 3.0, position: .bottom)
             }
         }
         else

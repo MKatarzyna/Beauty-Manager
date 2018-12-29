@@ -20,10 +20,8 @@ class CoreDataOperations {
         let entity = NSEntityDescription.entity(forEntityName: "AppointmentEntity", in: context)
         let newAppointment = NSManagedObject(entity: entity!, insertInto: context)
         
-        let dateString = dateValue
-        
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let dateFromString = dateFormatter.date(from: dateString)
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateFromString = dateFormatter.date(from: dateValue)
         
         let newID = findMaximumID() + 1
         print("NEW ID: \(newID)")
@@ -82,9 +80,8 @@ class CoreDataOperations {
         let resultData = result as! [AppointmentEntity]
         
         if resultData.count != 0{
-            let dateString = dateValue
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            let dateFromString = dateFormatter.date(from: dateString)
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let dateFromString = dateFormatter.date(from: dateValue)
             
             resultData[0].setValue(nameValue, forKey: "name")
             resultData[0].setValue(dateFromString, forKey: "date")
@@ -120,5 +117,28 @@ class CoreDataOperations {
         }
         //print("MAX ID: \(maxID)")
         return maxID
+    }
+    
+    // REMOVE ALL APPOINTMENTS
+    func removeAllAppointments() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "AppointmentEntity")
+        request.returnsObjectsAsFaults = false
+        
+        let result = try? context.fetch(request)
+        let resultData = result as! [AppointmentEntity]
+        
+        for object in resultData {
+            context.delete(object)
+        }
+        
+        do {
+            try context.save()
+            print("saved!")
+        }
+        catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        }
     }
 }
