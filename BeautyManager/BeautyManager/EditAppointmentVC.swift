@@ -10,26 +10,8 @@ import UIKit
 import CoreData
 import Toast_Swift
 import PopupDialog
-//import MessageUI
 
-//extension UIViewController {
-//    func hideKeyboardWhenTappedAround() {
-//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-//        tap.cancelsTouchesInView = false
-//        view.addGestureRecognizer(tap)
-//    }
-//
-//    @objc func dismissKeyboard() {
-//        view.endEditing(true)
-//    }
-//}
-
-class AppointmentViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
-    // MFMessageComposeViewControllerDelegate
-    
-//    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
-//
-//    }
+class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
     @IBOutlet weak var nameOfVisitTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
@@ -38,15 +20,27 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate, UITextVi
     @IBOutlet weak var notesTextView: UITextView!
     
     private var datePicker: UIDatePicker?
+//    var nameOfWindow: String = "Edit Window"
     
     var style = ToastStyle()
     var appointment: Appointment?
+    var phoneNumber: String = ""
     
     let dateFormatter = DateFormatter()
     let alphabetRule: CharacterSet = ["0","1","2","3","4","5","6","7","8","9", "a", "ą", "b", "c", "ć", "d", "e", "ę", "f", "g", "h", "i", "j", "k", "l", "ł", "m", "n", "ń", "o", "ó", "p", "q", "r", "s", "ś", "t", "u", "v", "w", "x", "y", "z", "ź", "ż", " ", "-"]
     var currentAppointmentID: Int64 = 0
     
+    @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue){
+        if unwindSegue.source is ContactsListVC {
+            if let senderVC = unwindSegue.source as? ContactsListVC {
+                phoneNumber = senderVC.phoneNumber
+                contactTextField.text = phoneNumber
+            }
+        }
+    }
+    
     @IBAction func sendSMS(_ sender: Any) {
+        // POPUP DIALOG
         let mainTitle = "Sending SMS"
         let question = "Choose a template for SMS:"
         let popupDialog = PopupDialog(title: mainTitle, message: question)
@@ -105,25 +99,8 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate, UITextVi
         
         let finalSet = CharacterSet.letters.union(alphabetRule)
         
-//        if !(nameValue?.isEmpty)! &&
-//            !(dateValue?.isEmpty)! &&
-//            !(contactValue?.isEmpty)! &&
-//            !(addressValue?.isEmpty)! &&
-//            !(notesValue?.isEmpty)! {
-        
-        if (nameOfVisitTextField.text != ""
-            && dateTextField.text != ""
-            && contactTextField.text != ""
-            && addressTextField.text != ""
-            && notesTextView.text != "") {
-            
+        if (nameOfVisitTextField.text != "" && dateTextField.text != "") {
             if (finalSet.isSuperset(of: CharacterSet(charactersIn: nameOfVisitTextField.text!)) == true) {
-                
-//                let nameValue = nameOfVisitTextField.text
-//                let dateValue = dateTextField.text
-//                let contactValue = contactTextField.text
-//                let addressValue = addressTextField.text
-//                let notesValue = notesTextView.text
                 
                 let mainTitle = "Modifying appointment"
                 let question = "Do you want to modify appointment?"
@@ -132,7 +109,6 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate, UITextVi
                 let cancelButton = CancelButton(title: "CANCEL") {
                     print("You canceled the modifying of appointment.")
                     self.view.makeToast("You canceled the modifying of appointment.", duration: 3.0, position: .bottom)
-//                    self.navigateToPreviousView()
                 }
                 
                 let yesButton = DefaultButton(title: "YES", dismissOnTap: true) {
@@ -168,8 +144,8 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate, UITextVi
         
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .dateAndTime
-        datePicker?.addTarget(self, action: #selector(AppointmentViewController.dateChanged(datePicker:)), for: .valueChanged)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(AppointmentViewController.viewTapped(gestureRecognize:)))
+        datePicker?.addTarget(self, action: #selector(EditAppointmentVC.dateChanged(datePicker:)), for: .valueChanged)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(EditAppointmentVC.viewTapped(gestureRecognize:)))
         view.addGestureRecognizer(tapGesture)
         dateTextField.inputView = datePicker
         
@@ -222,4 +198,10 @@ class AppointmentViewController: UIViewController, UITextFieldDelegate, UITextVi
         // Dispose of any resources that can be recreated.
     }
     
+//    // wysłanie elementu z tablicy appointments dla zaznaczonego wiersza
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let destination = segue.destination as? ContactsListVC {
+//            destination.nameOfWindow = nameOfWindow
+//        }
+//    }
 }

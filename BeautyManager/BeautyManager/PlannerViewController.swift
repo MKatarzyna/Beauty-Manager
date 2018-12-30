@@ -11,7 +11,9 @@ import UIKit
 import CoreData
 
 class PlannerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     @IBOutlet weak var tableView: UITableView!
+    
     var appointments = [Appointment]()
     
     override func viewDidLoad() {
@@ -28,11 +30,6 @@ class PlannerViewController: UIViewController, UITableViewDelegate, UITableViewD
         loadPlannerDataFromDB()
         tableView.reloadData()
     }
-    
-//    override func didReceiveMemoryWarning() {
-//        super.didReceiveMemoryWarning()
-//        // Dispose of any resources that can be recreated.
-//    }
     
     // wczytanie danych z core data
     @objc func loadPlannerDataFromDB() {
@@ -54,7 +51,6 @@ class PlannerViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let contactValue = data.value(forKey: "contact") as! String
                 let addressValue = data.value(forKey: "address") as! String
                 let notesValue = data.value(forKey: "notes") as! String
-
                 let stringDate = dateFormatter.string(from: dateValue)
                 
                 // umieszczenie wartości w obiekcie appointment
@@ -75,8 +71,6 @@ class PlannerViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     // zliczenie elementów z tablicy, aby tableview wiedział ile wierszy ma wyświetlić
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("Appointment: ")
-        print(appointments.count)
         return appointments.count
     }
     
@@ -84,7 +78,6 @@ class PlannerViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "basicCell")
         cell?.textLabel?.text = appointments[indexPath.row].name.capitalized
-//        cell?.detailTextLabel?.text = appointments[indexPath.row].date
         print(" basicCell ")
         return cell!
     }
@@ -96,7 +89,7 @@ class PlannerViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     // wysłanie elementu z tablicy appointments dla zaznaczonego wiersza
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? AppointmentViewController {
+        if let destination = segue.destination as? EditAppointmentVC {
             destination.appointment = appointments[(tableView.indexPathForSelectedRow?.row)!]
         }
     }

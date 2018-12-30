@@ -15,7 +15,7 @@
 		4436CB1120CAF62B00FB7E9F /* BMIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4436CB1020CAF62B00FB7E9F /* BMIViewController.swift */; };
 		4442889520BB0222004F8C02 /* PlannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442889420BB0222004F8C02 /* PlannerViewController.swift */; };
 		4442889720BB050B004F8C02 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442889620BB050B004F8C02 /* Appointment.swift */; };
-		4442889920BB150E004F8C02 /* AppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442889820BB150E004F8C02 /* AppointmentViewController.swift */; };
+		4442889920BB150E004F8C02 /* EditAppointmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442889820BB150E004F8C02 /* EditAppointmentVC.swift */; };
 		444B3F7820B08072005E0266 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444B3F7720B08072005E0266 /* AppDelegate.swift */; };
 		444B3F7A20B08072005E0266 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444B3F7920B08072005E0266 /* ViewController.swift */; };
 		444B3F7D20B08072005E0266 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 444B3F7B20B08072005E0266 /* Main.storyboard */; };
@@ -37,13 +37,18 @@
 		447D8BEF21D682B800D523D6 /* ChartSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D8BEE21D682B800D523D6 /* ChartSettingsVC.swift */; };
 		447D8BF121D7C8C500D523D6 /* ShortTipsCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D8BF021D7C8C500D523D6 /* ShortTipsCoreData.swift */; };
 		447D8BF321D7CDAA00D523D6 /* ShortTips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D8BF221D7CDAA00D523D6 /* ShortTips.swift */; };
-		44A3745720CD5774007FF551 /* NewAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A3745620CD5774007FF551 /* NewAppointmentViewController.swift */; };
+		44A3745720CD5774007FF551 /* NewAppointmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A3745620CD5774007FF551 /* NewAppointmentVC.swift */; };
 		44A3745920CD671C007FF551 /* CoreDataOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A3745820CD671C007FF551 /* CoreDataOperations.swift */; };
 		44A3745F20CD8D39007FF551 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A3745E20CD8D39007FF551 /* CalendarViewController.swift */; };
 		44A3746320CD92C8007FF551 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A3746220CD92C8007FF551 /* DateCollectionViewCell.swift */; };
 		44A3746520CD9422007FF551 /* CalendarVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A3746420CD9422007FF551 /* CalendarVars.swift */; };
 		44B017E820D849CE00F025EE /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B017E720D849CE00F025EE /* ChartData.swift */; };
 		44BE923621B1B5740000633C /* TipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BE923521B1B5740000633C /* TipsViewController.swift */; };
+		44CD117B21D8FFC70000370C /* ContactsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD117A21D8FFC70000370C /* ContactsListVC.swift */; };
+		44CD117D21D8FFE80000370C /* NewContactVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD117C21D8FFE80000370C /* NewContactVC.swift */; };
+		44CD117F21D8FFF90000370C /* EditContactVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD117E21D8FFF90000370C /* EditContactVC.swift */; };
+		44CD118121D901750000370C /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD118021D901750000370C /* Contact.swift */; };
+		44DA4E3121D925EF008356DD /* ContactsCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DA4E3021D925EF008356DD /* ContactsCoreData.swift */; };
 		C3186DB1107C518ADD916CE4 /* Pods_BeautyManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01656B18C8E8721F43A2DB84 /* Pods_BeautyManager.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,7 +64,7 @@
 		4436CB1020CAF62B00FB7E9F /* BMIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMIViewController.swift; sourceTree = "<group>"; };
 		4442889420BB0222004F8C02 /* PlannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerViewController.swift; sourceTree = "<group>"; };
 		4442889620BB050B004F8C02 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
-		4442889820BB150E004F8C02 /* AppointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentViewController.swift; sourceTree = "<group>"; };
+		4442889820BB150E004F8C02 /* EditAppointmentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAppointmentVC.swift; sourceTree = "<group>"; };
 		444B3F7420B08072005E0266 /* BeautyManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeautyManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		444B3F7720B08072005E0266 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		444B3F7920B08072005E0266 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -83,13 +88,18 @@
 		447D8BEE21D682B800D523D6 /* ChartSettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartSettingsVC.swift; sourceTree = "<group>"; };
 		447D8BF021D7C8C500D523D6 /* ShortTipsCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortTipsCoreData.swift; sourceTree = "<group>"; };
 		447D8BF221D7CDAA00D523D6 /* ShortTips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortTips.swift; sourceTree = "<group>"; };
-		44A3745620CD5774007FF551 /* NewAppointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAppointmentViewController.swift; sourceTree = "<group>"; };
+		44A3745620CD5774007FF551 /* NewAppointmentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAppointmentVC.swift; sourceTree = "<group>"; };
 		44A3745820CD671C007FF551 /* CoreDataOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataOperations.swift; sourceTree = "<group>"; };
 		44A3745E20CD8D39007FF551 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		44A3746220CD92C8007FF551 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		44A3746420CD9422007FF551 /* CalendarVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVars.swift; sourceTree = "<group>"; };
 		44B017E720D849CE00F025EE /* ChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
 		44BE923521B1B5740000633C /* TipsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsViewController.swift; sourceTree = "<group>"; };
+		44CD117A21D8FFC70000370C /* ContactsListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListVC.swift; sourceTree = "<group>"; };
+		44CD117C21D8FFE80000370C /* NewContactVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewContactVC.swift; sourceTree = "<group>"; };
+		44CD117E21D8FFF90000370C /* EditContactVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContactVC.swift; sourceTree = "<group>"; };
+		44CD118021D901750000370C /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		44DA4E3021D925EF008356DD /* ContactsCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsCoreData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,10 +127,15 @@
 			children = (
 				444B3FAA20B08D57005E0266 /* Planner.storyboard */,
 				4442889420BB0222004F8C02 /* PlannerViewController.swift */,
-				4442889820BB150E004F8C02 /* AppointmentViewController.swift */,
+				4442889820BB150E004F8C02 /* EditAppointmentVC.swift */,
 				4442889620BB050B004F8C02 /* Appointment.swift */,
-				44A3745620CD5774007FF551 /* NewAppointmentViewController.swift */,
+				44A3745620CD5774007FF551 /* NewAppointmentVC.swift */,
 				44A3745820CD671C007FF551 /* CoreDataOperations.swift */,
+				44CD117A21D8FFC70000370C /* ContactsListVC.swift */,
+				44CD117C21D8FFE80000370C /* NewContactVC.swift */,
+				44CD117E21D8FFF90000370C /* EditContactVC.swift */,
+				44CD118021D901750000370C /* Contact.swift */,
+				44DA4E3021D925EF008356DD /* ContactsCoreData.swift */,
 			);
 			name = Planner;
 			sourceTree = "<group>";
@@ -367,7 +382,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44CD117F21D8FFF90000370C /* EditContactVC.swift in Sources */,
 				446240F121A0585B004E386F /* TipsCoreData.swift in Sources */,
+				44DA4E3121D925EF008356DD /* ContactsCoreData.swift in Sources */,
 				44A3745F20CD8D39007FF551 /* CalendarViewController.swift in Sources */,
 				44BE923621B1B5740000633C /* TipsViewController.swift in Sources */,
 				446240E121A03A9E004E386F /* Tip.swift in Sources */,
@@ -375,7 +392,7 @@
 				44A3745920CD671C007FF551 /* CoreDataOperations.swift in Sources */,
 				44A3746520CD9422007FF551 /* CalendarVars.swift in Sources */,
 				444B3F7A20B08072005E0266 /* ViewController.swift in Sources */,
-				44A3745720CD5774007FF551 /* NewAppointmentViewController.swift in Sources */,
+				44A3745720CD5774007FF551 /* NewAppointmentVC.swift in Sources */,
 				4436CB1120CAF62B00FB7E9F /* BMIViewController.swift in Sources */,
 				447D8BF321D7CDAA00D523D6 /* ShortTips.swift in Sources */,
 				447D8BEF21D682B800D523D6 /* ChartSettingsVC.swift in Sources */,
@@ -385,9 +402,12 @@
 				444B3F7820B08072005E0266 /* AppDelegate.swift in Sources */,
 				440CB7F621B98AEA006F5168 /* CalendarKit.swift in Sources */,
 				4442889720BB050B004F8C02 /* Appointment.swift in Sources */,
+				44CD117B21D8FFC70000370C /* ContactsListVC.swift in Sources */,
+				44CD118121D901750000370C /* Contact.swift in Sources */,
 				441D825021CFC91100D54676 /* ExamplesDefaults.swift in Sources */,
-				4442889920BB150E004F8C02 /* AppointmentViewController.swift in Sources */,
+				4442889920BB150E004F8C02 /* EditAppointmentVC.swift in Sources */,
 				447D8BED21D62F1E00D523D6 /* MeasurementsCoreData.swift in Sources */,
+				44CD117D21D8FFE80000370C /* NewContactVC.swift in Sources */,
 				44B017E820D849CE00F025EE /* ChartData.swift in Sources */,
 				446240E321A03AC6004E386F /* Measurement.swift in Sources */,
 				447D8BF121D7C8C500D523D6 /* ShortTipsCoreData.swift in Sources */,

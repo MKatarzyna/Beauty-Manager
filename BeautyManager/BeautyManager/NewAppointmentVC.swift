@@ -10,10 +10,12 @@ import UIKit
 import CoreData
 import Toast_Swift
 
-class NewAppointmentViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
+class NewAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     var appointment: Appointment?
     var style = ToastStyle()
+//    var nameOfWindow: String = "New Window"
     
+    var phoneNumber: String = ""
     let dateFormatter = DateFormatter()
     let alphabetRule: CharacterSet = ["0","1","2","3","4","5","6","7","8","9", "a", "ą", "b", "c", "ć", "d", "e", "ę", "f", "g", "h", "i", "j", "k", "l", "ł", "m", "n", "ń", "o", "ó", "p", "q", "r", "s", "ś", "t", "u", "v", "w", "x", "y", "z", "ź", "ż", " ", "-"]
 
@@ -25,6 +27,15 @@ class NewAppointmentViewController: UIViewController, UITextFieldDelegate, UITex
     
     private var datePicker: UIDatePicker?
     
+    @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue){
+        if unwindSegue.source is ContactsListVC {
+            if let senderVC = unwindSegue.source as? ContactsListVC {
+                phoneNumber = senderVC.phoneNumber
+                contactTextField.text = phoneNumber
+            }
+        }
+    }
+    
     @IBAction func addNewAppointment(_ sender: Any) {
         
         // red
@@ -33,24 +44,15 @@ class NewAppointmentViewController: UIViewController, UITextFieldDelegate, UITex
         
         let finalSet = CharacterSet.letters.union(alphabetRule)
         
-        
-        if (nameTextField.text != "" && dateTextField.text != "")
-        {
+        if (nameTextField.text != "" && dateTextField.text != "") {
             if (finalSet.isSuperset(of: CharacterSet(charactersIn: nameTextField.text!)) == true) {
-                let nameValue = nameTextField.text
-                let dateValue = dateTextField.text
-                let contactValue = contactTextField.text
-                let addressValue = addressTextField.text
-                let notesValue = notesTextView.text
-                
-                if !(nameValue?.isEmpty)! && !(dateValue?.isEmpty)! && !(contactValue?.isEmpty)! && !(addressValue?.isEmpty)! && !(notesValue?.isEmpty)! {
-                    _ = CoreDataOperations().addAppointment(nameValue: nameTextField.text!, dateValue: dateTextField.text!, contactValue: contactTextField.text!, addressValue: addressTextField.text!, notesValue: notesTextView.text!)
+                    _ = CoreDataOperations().addAppointment(nameValue: nameTextField.text!,
+                                                            dateValue: dateTextField.text!,
+                                                            contactValue: contactTextField.text!,
+                                                            addressValue: addressTextField.text!,
+                                                            notesValue: notesTextView.text!)
                     print("Appointment added")
                     navigateToPreviousView()
-                } else {
-                    print("Please populate all fields!")
-                    self.view.makeToast("Please populate all fields!", duration: 3.0, position: .bottom, style: style)
-                }
             } else {
                 self.view.makeToast("Please ensure the name field has correct characters (a-z, 0-9)", duration: 3.0, position: .bottom, style: style)
             }
@@ -59,6 +61,7 @@ class NewAppointmentViewController: UIViewController, UITextFieldDelegate, UITex
         }
     }
     
+    // BACK TO PREVIOUS PAGE
     func navigateToPreviousView() {
         _ = navigationController?.popViewController(animated: true)
     }
@@ -68,8 +71,8 @@ class NewAppointmentViewController: UIViewController, UITextFieldDelegate, UITex
         
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .dateAndTime
-        datePicker?.addTarget(self, action: #selector(AppointmentViewController.dateChanged(datePicker:)), for: .valueChanged)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(AppointmentViewController.viewTapped(gestureRecognize:)))
+        datePicker?.addTarget(self, action: #selector(NewAppointmentVC.dateChanged(datePicker:)), for: .valueChanged)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(NewAppointmentVC.viewTapped(gestureRecognize:)))
         view.addGestureRecognizer(tapGesture)
         dateTextField.inputView = datePicker
         
@@ -108,4 +111,10 @@ class NewAppointmentViewController: UIViewController, UITextFieldDelegate, UITex
         super.didReceiveMemoryWarning()
     }
     
+//    // wysłanie elementu z tablicy appointments dla zaznaczonego wiersza
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let destination = segue.destination as? ContactsListVC {
+//            destination.nameOfWindow = nameOfWindow
+//        }
+//    }
 }
