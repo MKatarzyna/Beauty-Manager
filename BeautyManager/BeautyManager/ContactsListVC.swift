@@ -14,18 +14,21 @@ class ContactsListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var selectContact: UIBarButtonItem!
     @IBOutlet weak var editContact: UIBarButtonItem!
+    
+    // na pasku navigacyjnym -> przenosi do edycji
     @IBAction func editContact(_ sender: Any) {
         performSegue(withIdentifier: "showContactDetails", sender: self)
     }
+    // na pasku nawigacyjnym przycisk DONE
     @IBAction func selectContact(_ sender: Any) {
         phoneNumber = contactsArray[selectedRow].contact
         print(phoneNumber)
         performSegue(withIdentifier: "CloseContactsList", sender: self)
     }
+    
     @IBOutlet weak var tableView: UITableView!
     
     var contactsArray = [Contact]()
-
     var selectedRow: Int = -1
     var phoneNumber: String = ""
     
@@ -34,10 +37,7 @@ class ContactsListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         tableView.delegate = self
         tableView.dataSource = self
-//        tableView.allowsMultipleSelectionDuringEditing = true
-//        tableView.allowsSelection = true
-//        tableView.setEditing(true, animated: false)
-        
+        // na starcie nie można ich użyć, są wyłączone
         editContact.isEnabled = false
         selectContact.isEnabled = false
     }
@@ -103,54 +103,23 @@ class ContactsListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell!
     }
     
-//    var SelectedRow: IndexPath
     
     // jesli wiersz został zaznaczony/klikniety to wykonaj przejscie (segue) o nazwie showContactDetails
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-//        tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
-        print("ON")
+       
         editContact.isEnabled = true
         selectContact.isEnabled = true
         selectedRow = indexPath.row
-        print("\(selectedRow)")
-        
-//        performSegue(withIdentifier: "showContactDetails", sender: self)
-        
-
     }
-//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        tableView.cellForRow(at: indexPath)?.accessoryType = .none
-//        print("OFF")
-//    }
-
-    
     
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        
         print("SELECT")
-        
     }
-    
-//    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-//        print("SELECTED")
-//
-//        return indexPath;
-//    }
-    
+
     // wysłanie elementu z tablicy contacts dla zaznaczonego wiersza
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? EditContactVC {
             destination.contact = contactsArray[(tableView.indexPathForSelectedRow?.row)!]
-            
         }
-//        if let destination = segue.destination as? EditContactVC {
-//            destination.nameOfWindow = nameOfWindow
-//        }
-    }
-    
-    @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue){
-        
-    }
-    
+    } 
 }

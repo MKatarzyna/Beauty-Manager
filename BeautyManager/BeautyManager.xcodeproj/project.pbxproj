@@ -13,6 +13,7 @@
 		4429EA26217218BD003BDDF3 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429EA25217218BD003BDDF3 /* Toast.swift */; };
 		4429EA282173930A003BDDF3 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429EA272173930A003BDDF3 /* UITabBarController.swift */; };
 		4436CB1120CAF62B00FB7E9F /* BMIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4436CB1020CAF62B00FB7E9F /* BMIViewController.swift */; };
+		443B97B821DA626800B56B40 /* ReminderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B97B721DA626800B56B40 /* ReminderVC.swift */; };
 		4442889520BB0222004F8C02 /* PlannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442889420BB0222004F8C02 /* PlannerViewController.swift */; };
 		4442889720BB050B004F8C02 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442889620BB050B004F8C02 /* Appointment.swift */; };
 		4442889920BB150E004F8C02 /* EditAppointmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442889820BB150E004F8C02 /* EditAppointmentVC.swift */; };
@@ -62,6 +63,7 @@
 		4429EA25217218BD003BDDF3 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		4429EA272173930A003BDDF3 /* UITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarController.swift; sourceTree = "<group>"; };
 		4436CB1020CAF62B00FB7E9F /* BMIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMIViewController.swift; sourceTree = "<group>"; };
+		443B97B721DA626800B56B40 /* ReminderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderVC.swift; sourceTree = "<group>"; };
 		4442889420BB0222004F8C02 /* PlannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerViewController.swift; sourceTree = "<group>"; };
 		4442889620BB050B004F8C02 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
 		4442889820BB150E004F8C02 /* EditAppointmentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAppointmentVC.swift; sourceTree = "<group>"; };
@@ -122,6 +124,26 @@
 			name = General;
 			sourceTree = "<group>";
 		};
+		443B97B521DA620900B56B40 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				44CD117A21D8FFC70000370C /* ContactsListVC.swift */,
+				44CD117C21D8FFE80000370C /* NewContactVC.swift */,
+				44CD117E21D8FFF90000370C /* EditContactVC.swift */,
+				44CD118021D901750000370C /* Contact.swift */,
+				44DA4E3021D925EF008356DD /* ContactsCoreData.swift */,
+			);
+			name = Contacts;
+			sourceTree = "<group>";
+		};
+		443B97B621DA621E00B56B40 /* Reminder */ = {
+			isa = PBXGroup;
+			children = (
+				443B97B721DA626800B56B40 /* ReminderVC.swift */,
+			);
+			name = Reminder;
+			sourceTree = "<group>";
+		};
 		4442889B20BB1561004F8C02 /* Planner */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,11 +153,6 @@
 				4442889620BB050B004F8C02 /* Appointment.swift */,
 				44A3745620CD5774007FF551 /* NewAppointmentVC.swift */,
 				44A3745820CD671C007FF551 /* CoreDataOperations.swift */,
-				44CD117A21D8FFC70000370C /* ContactsListVC.swift */,
-				44CD117C21D8FFE80000370C /* NewContactVC.swift */,
-				44CD117E21D8FFF90000370C /* EditContactVC.swift */,
-				44CD118021D901750000370C /* Contact.swift */,
-				44DA4E3021D925EF008356DD /* ContactsCoreData.swift */,
 			);
 			name = Planner;
 			sourceTree = "<group>";
@@ -162,6 +179,8 @@
 		444B3F7620B08072005E0266 /* BeautyManager */ = {
 			isa = PBXGroup;
 			children = (
+				443B97B621DA621E00B56B40 /* Reminder */,
+				443B97B521DA620900B56B40 /* Contacts */,
 				4429EA242172186F003BDDF3 /* General */,
 				44A3745D20CD7FB6007FF551 /* Measurements */,
 				44A3745C20CD7FAE007FF551 /* Calendar */,
@@ -404,6 +423,7 @@
 				4442889720BB050B004F8C02 /* Appointment.swift in Sources */,
 				44CD117B21D8FFC70000370C /* ContactsListVC.swift in Sources */,
 				44CD118121D901750000370C /* Contact.swift in Sources */,
+				443B97B821DA626800B56B40 /* ReminderVC.swift in Sources */,
 				441D825021CFC91100D54676 /* ExamplesDefaults.swift in Sources */,
 				4442889920BB150E004F8C02 /* EditAppointmentVC.swift in Sources */,
 				447D8BED21D62F1E00D523D6 /* MeasurementsCoreData.swift in Sources */,

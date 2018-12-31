@@ -17,8 +17,10 @@ class Appointment {
     var address: String
     var notes: String
     var id: Int64
+    var reminder: Bool
+    var reminderDate: String
  
-    init(id: Int64, name: String, date: String, contact: String, address: String, notes: String)
+    init(id: Int64, name: String, date: String, contact: String, address: String, notes: String, reminder: Bool, reminderDate: String)
     {
         self.name = name
         self.date = date
@@ -26,5 +28,7 @@ class Appointment {
         self.address = address
         self.notes = notes
         self.id = id
+        self.reminder = reminder
+        self.reminderDate = reminderDate
     }
 }

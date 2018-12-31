@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreData
+import UserNotifications
 
 class PlannerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -21,6 +22,9 @@ class PlannerViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,6 +33,9 @@ class PlannerViewController: UIViewController, UITableViewDelegate, UITableViewD
         appointments.removeAll()
         loadPlannerDataFromDB()
         tableView.reloadData()
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
     
     // wczytanie danych z core data
@@ -51,7 +58,10 @@ class PlannerViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let contactValue = data.value(forKey: "contact") as! String
                 let addressValue = data.value(forKey: "address") as! String
                 let notesValue = data.value(forKey: "notes") as! String
+                let reminderValue = data.value(forKey: "reminder") as! Bool
+                let reminderDateValue = data.value(forKey: "reminderDate") as! Date
                 let stringDate = dateFormatter.string(from: dateValue)
+                let stringReminderDate = dateFormatter.string(from: reminderDateValue)
                 
                 // umieszczenie wartości w obiekcie appointment
                 let appointment = Appointment(
@@ -60,7 +70,9 @@ class PlannerViewController: UIViewController, UITableViewDelegate, UITableViewD
                     date: stringDate,
                     contact: contactValue,
                     address: addressValue,
-                    notes: notesValue)
+                    notes: notesValue,
+                    reminder: reminderValue,
+                    reminderDate: stringReminderDate)
                 // dodanie jednej wizyty do tablicy wizyt (do listy)
                 appointments.append(appointment)
             }

@@ -13,7 +13,7 @@ import CoreData
 class CoreDataOperations {
     let dateFormatter = DateFormatter()
 
-    func addAppointment(nameValue: String, dateValue: String, contactValue: String, addressValue: String, notesValue: String){
+    func addAppointment(nameValue: String, dateValue: String, contactValue: String, addressValue: String, notesValue: String, reminderValue: Bool, reminderDateValue: String){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
@@ -22,6 +22,7 @@ class CoreDataOperations {
         
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let dateFromString = dateFormatter.date(from: dateValue)
+        let reminderDateFromString = dateFormatter.date(from: reminderDateValue)
         
         let newID = findMaximumID() + 1
         print("NEW ID: \(newID)")
@@ -32,6 +33,8 @@ class CoreDataOperations {
         newAppointment.setValue(addressValue, forKey: "address")
         newAppointment.setValue(notesValue, forKey: "notes")
         newAppointment.setValue(newID, forKey: "id")
+        newAppointment.setValue(reminderValue, forKey: "reminder")
+        newAppointment.setValue(reminderDateFromString, forKey: "reminderDate")
         
         do {
             try context.save()
@@ -67,7 +70,7 @@ class CoreDataOperations {
         }
     }
     
-    func modifyAppointment(id: Int64, nameValue: String, dateValue: String, contactValue: String, addressValue: String, notesValue: String){
+    func modifyAppointment(id: Int64, nameValue: String, dateValue: String, contactValue: String, addressValue: String, notesValue: String, reminderValue: Bool, reminderDateValue: String){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "AppointmentEntity")
@@ -82,12 +85,15 @@ class CoreDataOperations {
         if resultData.count != 0{
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             let dateFromString = dateFormatter.date(from: dateValue)
+            let reminderDateFromString = dateFormatter.date(from: reminderDateValue)
             
             resultData[0].setValue(nameValue, forKey: "name")
             resultData[0].setValue(dateFromString, forKey: "date")
             resultData[0].setValue(contactValue, forKey: "contact")
             resultData[0].setValue(addressValue, forKey: "address")
             resultData[0].setValue(notesValue, forKey: "notes")
+            resultData[0].setValue(reminderValue, forKey: "reminder")
+            resultData[0].setValue(reminderDateFromString, forKey: "reminderDate")
             
             do {
                 try context.save()

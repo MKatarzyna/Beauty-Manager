@@ -13,9 +13,10 @@ import Toast_Swift
 class NewAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     var appointment: Appointment?
     var style = ToastStyle()
-//    var nameOfWindow: String = "New Window"
-    
     var phoneNumber: String = ""
+    var remindDate: String = ""
+    var isReminderEnabled: Bool = false
+    
     let dateFormatter = DateFormatter()
     let alphabetRule: CharacterSet = ["0","1","2","3","4","5","6","7","8","9", "a", "ą", "b", "c", "ć", "d", "e", "ę", "f", "g", "h", "i", "j", "k", "l", "ł", "m", "n", "ń", "o", "ó", "p", "q", "r", "s", "ś", "t", "u", "v", "w", "x", "y", "z", "ź", "ż", " ", "-"]
 
@@ -27,7 +28,8 @@ class NewAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelegat
     
     private var datePicker: UIDatePicker?
     
-    @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue){
+    // umożliwia wyłączenie okienka i przejście do poprzedniego poprzez segue. Odbiera zmienną phoneNumber z zamkniętego okienka
+    @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue) {
         if unwindSegue.source is ContactsListVC {
             if let senderVC = unwindSegue.source as? ContactsListVC {
                 phoneNumber = senderVC.phoneNumber
@@ -50,9 +52,12 @@ class NewAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelegat
                                                             dateValue: dateTextField.text!,
                                                             contactValue: contactTextField.text!,
                                                             addressValue: addressTextField.text!,
-                                                            notesValue: notesTextView.text!)
-                    print("Appointment added")
-                    navigateToPreviousView()
+                                                            notesValue: notesTextView.text!,
+                                                            reminderValue: isReminderEnabled,
+                                                            reminderDateValue: remindDate)
+                
+                print("Appointment added")
+                navigateToPreviousView()
             } else {
                 self.view.makeToast("Please ensure the name field has correct characters (a-z, 0-9)", duration: 3.0, position: .bottom, style: style)
             }
@@ -77,6 +82,9 @@ class NewAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelegat
         dateTextField.inputView = datePicker
         
         self.hideKeyboardWhenTappedAround()
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        remindDate = dateFormatter.string(from: Date())
     }
     
     // zabezpieczenie datePickera przed wklejaniem tresci i dodawaniem innych znaków niż te podane poprzez dataPicker
@@ -106,15 +114,7 @@ class NewAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelegat
         return false
     }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-//    // wysłanie elementu z tablicy appointments dla zaznaczonego wiersza
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let destination = segue.destination as? ContactsListVC {
-//            destination.nameOfWindow = nameOfWindow
-//        }
-//    }
 }

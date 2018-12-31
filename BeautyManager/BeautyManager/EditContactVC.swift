@@ -49,24 +49,6 @@ class EditContactVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
         self.present(popupDialog, animated: true, completion: nil)
     }
     
-
-    // WYBRANIE KONKRETNEGO KONTAKTU
-    @IBAction func selectContact(_ sender: Any) {
-//        if(nameOfWindow == "Edit Window"){
-//            performSegue(withIdentifier: "backToExistingContact", sender: self)
-//        } else if (nameOfWindow == "New Window"){
-//            performSegue(withIdentifier: "backToNewContact", sender: self)
-//        }
-//        view.window!.rootViewController?.dismiss(animated: true, completion: nil)
-//        let vc = ContactsListVC()
-//        navigationController?.popToViewController(vc, animated: true)
-        //presentingViewController!.dismiss(animated:true)
-        
-        
-        
-//        performSegue(withIdentifier: "CloseContactsList", sender: self)
-    }
-    
     // ZAPISANIE ZEDYTOWANYCH PÓL/kontaktu, nadpisanie go
     @IBAction func modifyContact(_ sender: Any) {
         // red

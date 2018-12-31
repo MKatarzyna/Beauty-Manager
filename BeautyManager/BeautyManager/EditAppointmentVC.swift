@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 import Toast_Swift
 import PopupDialog
+import UserNotifications
+
 
 class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
@@ -20,26 +22,35 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
     @IBOutlet weak var notesTextView: UITextView!
     
     private var datePicker: UIDatePicker?
-//    var nameOfWindow: String = "Edit Window"
     
     var style = ToastStyle()
     var appointment: Appointment?
     var phoneNumber: String = ""
+    var remindDate: String = ""
+    var isReminderEnabled: Bool = false
     
     let dateFormatter = DateFormatter()
     let alphabetRule: CharacterSet = ["0","1","2","3","4","5","6","7","8","9", "a", "ą", "b", "c", "ć", "d", "e", "ę", "f", "g", "h", "i", "j", "k", "l", "ł", "m", "n", "ń", "o", "ó", "p", "q", "r", "s", "ś", "t", "u", "v", "w", "x", "y", "z", "ź", "ż", " ", "-"]
     var currentAppointmentID: Int64 = 0
     
-    @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue){
+    // umożliwia wyłączenie okienka i przejście do poprzedniego poprzez segue. Odbiera zmienną phoneNumber z zamkniętego okienka
+    @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue) {
         if unwindSegue.source is ContactsListVC {
             if let senderVC = unwindSegue.source as? ContactsListVC {
                 phoneNumber = senderVC.phoneNumber
                 contactTextField.text = phoneNumber
             }
         }
+        if unwindSegue.source is ReminderVC {
+            if let senderVC = unwindSegue.source as? ReminderVC {
+                remindDate = senderVC.remindDate
+                isReminderEnabled = senderVC.isReminderEnabled
+            }
+        }
     }
     
     @IBAction func sendSMS(_ sender: Any) {
+        print("Enabled: \(isReminderEnabled), Remind Date: \(remindDate)")
         // POPUP DIALOG
         let mainTitle = "Sending SMS"
         let question = "Choose a template for SMS:"
@@ -81,6 +92,7 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
             self.view.makeToast("You canceled the removing of appointment.", duration: 3.0, position: .bottom)
         }
         let yesButton = DefaultButton(title: "YES", dismissOnTap: true) {
+            self.turnOffReminder()
             CoreDataOperations().removeAppointment(
                 id: self.currentAppointmentID)
             print("Appointment removed")
@@ -89,6 +101,39 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
         popupDialog.addButtons([cancelButton, yesButton])
         self.present(popupDialog, animated: true, completion: nil)
     }
+    
+    func turnOffReminder() {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["reminderID\(appointment?.id)"])
+        print("OFF")
+        print("reminderID\(appointment?.id)")
+        
+    }
+    
+    func turnOnReminder() {
+        let content = UNMutableNotificationContent()
+        content.title = (appointment?.name)!
+        content.subtitle = (appointment?.date)!
+        content.body = (appointment?.address)!
+        content.badge = 1
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateFromString = dateFormatter.date(from: remindDate)
+        
+        var date = DateComponents()
+        date.year = calendar.component(.year, from: dateFromString!)
+        date.day = calendar.component(.day, from: dateFromString!)
+        date.month = calendar.component(.month, from: dateFromString!)
+        date.hour = calendar.component(.hour, from: dateFromString!)
+        date.minute = calendar.component(.minute, from: dateFromString!)
+
+        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
+        let request = UNNotificationRequest(identifier: "reminderID\(appointment?.id)", content: content, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        print("ON")
+        print("reminderID\(appointment?.id)")
+    }
+    
     
     // zapisanie zedytowanych pól w jednej wizycie w DB
     @IBAction func modifyAppointment(_ sender: Any) {
@@ -118,12 +163,20 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
                         dateValue: self.dateTextField.text!,
                         contactValue: self.contactTextField.text!,
                         addressValue: self.addressTextField.text!,
-                        notesValue: self.notesTextView.text!)
+                        notesValue: self.notesTextView.text!,
+                        reminderValue: self.isReminderEnabled,
+                        reminderDateValue: self.remindDate)
+                    
+                    if (self.isReminderEnabled == true) {
+                        self.turnOnReminder()
+                    } else {
+                        self.turnOffReminder()
+                    }
                     
                     print("Appointment modified")
                     self.navigateToPreviousView()
                 }
-                
+
                 popupDialog.addButtons([cancelButton, yesButton])
                 self.present(popupDialog, animated: true, completion: nil)
             } else {
@@ -164,6 +217,10 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
         addressTextField.text = appointment?.address
         notesTextView.text = appointment?.notes
         currentAppointmentID = (appointment?.id)!
+        isReminderEnabled = (appointment?.reminder)!
+        remindDate = (appointment?.reminderDate)!
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
     // zabezpieczenie datePickera przed wklejaniem tresci i dodawaniem innych znaków niż te podane poprzez dataPicker
@@ -186,6 +243,8 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateTextField.text = dateFormatter.string(from: datePicker.date)
+        remindDate = ""
+        isReminderEnabled = false
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -198,10 +257,12 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
         // Dispose of any resources that can be recreated.
     }
     
-//    // wysłanie elementu z tablicy appointments dla zaznaczonego wiersza
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let destination = segue.destination as? ContactsListVC {
-//            destination.nameOfWindow = nameOfWindow
-//        }
-//    }
+    // wysłanie elementu z tablicy contacts dla zaznaczonego wiersza
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? ReminderVC {
+            destination.visitDate = dateTextField.text!
+            destination.remindDate = remindDate
+            destination.isReminderEnabled = isReminderEnabled
+        }
+    }
 }

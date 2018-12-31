@@ -63,7 +63,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QkY-ro-IRg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-228" y="33.733133433283363"/>
+            <point key="canvasLocation" x="-242" y="29"/>
         </scene>
         <!--New AppointmentVC-->
         <scene sceneID="6a9-rM-vZs">
@@ -173,7 +173,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CI5-ai-qoD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="724" y="-274"/>
+            <point key="canvasLocation" x="546" y="-273"/>
         </scene>
         <!--Contacts ListVC-->
         <scene sceneID="6jN-Fl-zhz">
@@ -242,7 +242,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OWg-Mp-8C1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="zZq-Ga-GOK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1650" y="34"/>
+            <point key="canvasLocation" x="1337" y="60"/>
         </scene>
         <!--Edit ContactVC-->
         <scene sceneID="9dH-Ck-WN8">
@@ -291,10 +291,6 @@
                                 <rect key="frame" x="160" y="564" width="55" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="SELECT"/>
-                                <connections>
-                                    <action selector="addNewAppointment:" destination="fqA-Ud-GXW" eventType="touchUpInside" id="OKu-jl-guP"/>
-                                    <action selector="selectContact:" destination="Lpf-WX-XlZ" eventType="touchUpInside" id="gbW-YY-cBc"/>
-                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Contact name here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iRS-10-jOJ">
                                 <rect key="frame" x="16" y="102" width="343" height="30"/>
@@ -376,7 +372,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bk6-5x-Fxg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2572" y="399"/>
+            <point key="canvasLocation" x="2129" y="401"/>
         </scene>
         <!--Edit AppointmentVC-->
         <scene sceneID="uR5-yB-MA2">
@@ -401,7 +397,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pick a Date" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sKx-4o-Qev">
-                                <rect key="frame" x="16" y="171" width="343" height="30"/>
+                                <rect key="frame" x="16" y="171" width="290" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" red="0.19421067950000001" green="0.66621637489999996" blue="0.86066812280000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -488,6 +484,14 @@
                                     <segue destination="pnO-jl-dxJ" kind="show" id="o0K-tE-dJM"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHF-cJ-L58">
+                                <rect key="frame" x="320" y="170" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="clock"/>
+                                <connections>
+                                    <segue destination="TYu-7l-91l" kind="show" id="hyG-kN-yzY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.95199602839999997" green="0.9845712781" blue="0.98047727350000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="oKH-hf-NCy"/>
@@ -502,7 +506,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hSl-oh-xuy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="724" y="484"/>
+            <point key="canvasLocation" x="545" y="402"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eb2-vS-1gf">
@@ -520,7 +524,78 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ix6-69-Xot" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1065" y="34"/>
+            <point key="canvasLocation" x="-1081" y="29"/>
+        </scene>
+        <!--ReminderVC-->
+        <scene sceneID="Yb1-pE-3y9">
+            <objects>
+                <viewController id="TYu-7l-91l" customClass="ReminderVC" customModule="BeautyManager" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Uzt-gd-vM8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mzb-LF-2rj">
+                                <rect key="frame" x="155" y="558" width="68" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="CONFIRM"/>
+                                <connections>
+                                    <action selector="confirmReminder:" destination="TYu-7l-91l" eventType="touchUpInside" id="Ve4-GG-MNP"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TDR-ic-DiI">
+                                <rect key="frame" x="15" y="186" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" red="0.19421067950000001" green="0.66621637489999996" blue="0.86066812280000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Set alarm reminder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHc-Oh-X1N">
+                                <rect key="frame" x="16" y="90" width="150" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" red="0.17263176329999999" green="0.59500686599999997" blue="0.77009961969999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Visit date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m0R-dO-3nD">
+                                <rect key="frame" x="16" y="157" width="120" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" red="0.17263176329999999" green="0.59500686599999997" blue="0.77009961969999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pick a date" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gcK-f3-vbY">
+                                <rect key="frame" x="16" y="271" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" red="0.19421067950000001" green="0.66621637489999996" blue="0.86066812280000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Set reminder:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGx-Eu-muk">
+                                <rect key="frame" x="17" y="242" width="120" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" red="0.17263176329999999" green="0.59500686599999997" blue="0.77009961969999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dm9-qA-shv">
+                                <rect key="frame" x="293" y="90" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="aD6-Xn-7PH"/>
+                    </view>
+                    <connections>
+                        <outlet property="reminderTextField" destination="gcK-f3-vbY" id="1nX-0y-Wym"/>
+                        <outlet property="switchReminder" destination="dm9-qA-shv" id="sLZ-lR-ntd"/>
+                        <outlet property="visitDateTextField" destination="TDR-ic-DiI" id="UxE-F1-B0d"/>
+                        <segue destination="z0z-s1-9Ue" kind="unwind" identifier="CloseReminderWindow" unwindAction="myUnwindActionWithUnwindSegue:" id="mZD-H6-KbS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DzN-ev-Zsb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="z0z-s1-9Ue" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="545" y="1128"/>
         </scene>
         <!--New ContactVC-->
         <scene sceneID="OXK-qb-9eI">
@@ -638,9 +713,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eGT-du-jJq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2572" y="-275"/>
+            <point key="canvasLocation" x="2129" y="-274"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="clock" width="32" height="32"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="9Pz-kp-54F"/>
     </inferredMetricsTieBreakers>
