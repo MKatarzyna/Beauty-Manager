@@ -111,6 +111,15 @@ class ChartSettingsVC: UIViewController, UITextFieldDelegate {
 //        array = [(1, 2), (2, 1), (3, 9), (4, 7), (5, 10), (6, 9), (7, 15), (8, 8), (9, 70.6), (10, 17), (11, 3), (12, 2), (13, 8), (14, 50.0), (15, 10.1), (16, 10.54), (17, 15), (18, 8), (19, 20), (20, 17), (21, 2), (22, 1), (23, 9), (24, 7), (25, 10), (26, 9), (27, 15), (28, 8), (29, 20), (30, 17)]
         
         loadMeasurementsDataFromDB()
+        
+        dateTextField.text = getCurrentDate()
+    }
+    
+    func getCurrentDate() -> String {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM"
+        return dateFormatter.string(from: date)
     }
     
     func loadMeasurementsDataFromDB(){

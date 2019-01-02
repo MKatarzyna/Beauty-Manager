@@ -29,6 +29,7 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
     var remindDate: String = ""
     var isReminderEnabled: Bool = false
     
+    let calendar = Calendar.current
     let dateFormatter = DateFormatter()
     let alphabetRule: CharacterSet = ["0","1","2","3","4","5","6","7","8","9", "a", "ą", "b", "c", "ć", "d", "e", "ę", "f", "g", "h", "i", "j", "k", "l", "ł", "m", "n", "ń", "o", "ó", "p", "q", "r", "s", "ś", "t", "u", "v", "w", "x", "y", "z", "ź", "ż", " ", "-"]
     var currentAppointmentID: Int64 = 0
@@ -144,7 +145,7 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
         
         let finalSet = CharacterSet.letters.union(alphabetRule)
         
-        if (nameOfVisitTextField.text != "" && dateTextField.text != "") {
+        if (nameOfVisitTextField.text != "" && dateTextField.text != "" && remindDate != nil) {
             if (finalSet.isSuperset(of: CharacterSet(charactersIn: nameOfVisitTextField.text!)) == true) {
                 
                 let mainTitle = "Modifying appointment"
@@ -166,6 +167,8 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
                         notesValue: self.notesTextView.text!,
                         reminderValue: self.isReminderEnabled,
                         reminderDateValue: self.remindDate)
+                    
+                    print("RemindDate: \(self.remindDate)")
                     
                     if (self.isReminderEnabled == true) {
                         self.turnOnReminder()
@@ -243,7 +246,7 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateTextField.text = dateFormatter.string(from: datePicker.date)
-        remindDate = ""
+        remindDate = dateTextField.text!
         isReminderEnabled = false
     }
     

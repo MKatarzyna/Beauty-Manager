@@ -51,6 +51,15 @@ class BMIViewController: UIViewController, UITextFieldDelegate {
         self.kgTextField.delegate = self
         self.cmTextField.delegate = self
         self.dateTextField.delegate = self
+        
+        dateTextField.text = getCurrentDate()
+    }
+    
+    func getCurrentDate() -> String {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: date)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
