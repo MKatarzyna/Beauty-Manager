@@ -13,7 +13,16 @@ import CoreData
 class CoreDataOperations {
     let dateFormatter = DateFormatter()
 
-    func addAppointment(nameValue: String, dateValue: String, contactValue: String, addressValue: String, notesValue: String, reminderValue: Bool, reminderDateValue: String){
+    func addAppointment(nameValue: String,
+                        dateValue: String,
+                        contactValue: String,
+                        addressValue: String,
+                        notesValue: String,
+                        reminderValue: Bool,
+                        reminderDateValue: String,
+                        durationValue: String,
+                        colorNumberValue: Int64,
+                        isAllDayValue: Bool) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
@@ -35,6 +44,9 @@ class CoreDataOperations {
         newAppointment.setValue(newID, forKey: "id")
         newAppointment.setValue(reminderValue, forKey: "reminder")
         newAppointment.setValue(reminderDateFromString, forKey: "reminderDate")
+        newAppointment.setValue(durationValue, forKey: "duration")
+        newAppointment.setValue(colorNumberValue, forKey: "colorNumber")
+        newAppointment.setValue(isAllDayValue, forKey: "isAllDay")
         
         do {
             try context.save()
@@ -70,7 +82,17 @@ class CoreDataOperations {
         }
     }
     
-    func modifyAppointment(id: Int64, nameValue: String, dateValue: String, contactValue: String, addressValue: String, notesValue: String, reminderValue: Bool, reminderDateValue: String){
+    func modifyAppointment(id: Int64,
+                           nameValue: String,
+                           dateValue: String,
+                           contactValue: String,
+                           addressValue: String,
+                           notesValue: String,
+                           reminderValue: Bool,
+                           reminderDateValue: String,
+                           durationValue: String,
+                           colorNumberValue: Int64,
+                           isAllDayValue: Bool) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "AppointmentEntity")
@@ -94,6 +116,9 @@ class CoreDataOperations {
             resultData[0].setValue(notesValue, forKey: "notes")
             resultData[0].setValue(reminderValue, forKey: "reminder")
             resultData[0].setValue(reminderDateFromString, forKey: "reminderDate")
+            resultData[0].setValue(durationValue, forKey: "duration")
+            resultData[0].setValue(colorNumberValue, forKey: "colorNumber")
+            resultData[0].setValue(isAllDayValue, forKey: "isAllDay")
             
             do {
                 try context.save()

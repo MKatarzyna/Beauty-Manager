@@ -54,7 +54,10 @@ class NewAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelegat
                                                             addressValue: addressTextField.text!,
                                                             notesValue: notesTextView.text!,
                                                             reminderValue: isReminderEnabled,
-                                                            reminderDateValue: remindDate)
+                                                            reminderDateValue: remindDate,
+                                                            durationValue: "60",
+                                                            colorNumberValue: 0,
+                                                            isAllDayValue: false)
                 
                 print("Appointment added")
                 navigateToPreviousView()

@@ -19,8 +19,21 @@ class Appointment {
     var id: Int64
     var reminder: Bool
     var reminderDate: String
+    var duration: String
+    var colorNumber: Int64
+    var isAllDay: Bool
  
-    init(id: Int64, name: String, date: String, contact: String, address: String, notes: String, reminder: Bool, reminderDate: String)
+    init(id: Int64,
+         name: String,
+         date: String,
+         contact: String,
+         address: String,
+         notes: String,
+         reminder: Bool,
+         reminderDate: String,
+         duration: String,
+         colorNumber: Int64,
+         isAllDay: Bool)
     {
         self.name = name
         self.date = date
@@ -30,5 +43,8 @@ class Appointment {
         self.id = id
         self.reminder = reminder
         self.reminderDate = reminderDate
+        self.duration = duration
+        self.colorNumber = colorNumber
+        self.isAllDay = isAllDay
     }
 }

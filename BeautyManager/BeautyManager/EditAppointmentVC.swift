@@ -20,6 +20,9 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
     @IBOutlet weak var contactTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var notesTextView: UITextView!
+    @IBOutlet weak var allDaySwitch: UISwitch!
+    @IBOutlet weak var durationTextField: UITextField!
+    @IBOutlet weak var colorPickerControl: UISegmentedControl!
     
     private var datePicker: UIDatePicker?
     
@@ -144,44 +147,51 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
         style.messageColor = .white
         
         let finalSet = CharacterSet.letters.union(alphabetRule)
+        let numbersSet = CharacterSet.decimalDigits
         
         if (nameOfVisitTextField.text != "" && dateTextField.text != "" && remindDate != nil) {
             if (finalSet.isSuperset(of: CharacterSet(charactersIn: nameOfVisitTextField.text!)) == true) {
+                if (numbersSet.isSuperset(of: CharacterSet(charactersIn: durationTextField.text!)) == true) {
+                    let mainTitle = "Modifying appointment"
+                    let question = "Do you want to modify appointment?"
+                    let popupDialog = PopupDialog(title: mainTitle, message: question)
                 
-                let mainTitle = "Modifying appointment"
-                let question = "Do you want to modify appointment?"
-                let popupDialog = PopupDialog(title: mainTitle, message: question)
-                
-                let cancelButton = CancelButton(title: "CANCEL") {
-                    print("You canceled the modifying of appointment.")
-                    self.view.makeToast("You canceled the modifying of appointment.", duration: 3.0, position: .bottom)
-                }
-                
-                let yesButton = DefaultButton(title: "YES", dismissOnTap: true) {
-                    CoreDataOperations().modifyAppointment(
-                        id: self.currentAppointmentID,
-                        nameValue: self.nameOfVisitTextField.text!,
-                        dateValue: self.dateTextField.text!,
-                        contactValue: self.contactTextField.text!,
-                        addressValue: self.addressTextField.text!,
-                        notesValue: self.notesTextView.text!,
-                        reminderValue: self.isReminderEnabled,
-                        reminderDateValue: self.remindDate)
-                    
-                    print("RemindDate: \(self.remindDate)")
-                    
-                    if (self.isReminderEnabled == true) {
-                        self.turnOnReminder()
-                    } else {
-                        self.turnOffReminder()
+                    let cancelButton = CancelButton(title: "CANCEL") {
+                        print("You canceled the modifying of appointment.")
+                        self.view.makeToast("You canceled the modifying of appointment.", duration: 3.0, position: .bottom)
                     }
-                    
-                    print("Appointment modified")
-                    self.navigateToPreviousView()
-                }
+                
+                    let yesButton = DefaultButton(title: "YES", dismissOnTap: true) {
+                        CoreDataOperations().modifyAppointment(
+                            id: self.currentAppointmentID,
+                            nameValue: self.nameOfVisitTextField.text!,
+                            dateValue: self.dateTextField.text!,
+                            contactValue: self.contactTextField.text!,
+                            addressValue: self.addressTextField.text!,
+                            notesValue: self.notesTextView.text!,
+                            reminderValue: self.isReminderEnabled,
+                            reminderDateValue: self.remindDate,
+                            durationValue: self.durationTextField.text!,
+                            colorNumberValue: Int64(self.colorPickerControl!.selectedSegmentIndex),
+                            isAllDayValue: self.allDaySwitch.isOn)
+                        
+                        print("RemindDate: \(self.remindDate)")
+                        
+                        if (self.isReminderEnabled == true) {
+                            self.turnOnReminder()
+                        } else {
+                            self.turnOffReminder()
+                        }
+                        
+                        print("Appointment modified")
+                        self.navigateToPreviousView()
+                    }
 
-                popupDialog.addButtons([cancelButton, yesButton])
-                self.present(popupDialog, animated: true, completion: nil)
+                    popupDialog.addButtons([cancelButton, yesButton])
+                    self.present(popupDialog, animated: true, completion: nil)
+                } else {
+                    self.view.makeToast("Please ensure the duration field has correct characters (0-9)", duration: 3.0, position: .bottom, style: style)
+                }
             } else {
                 self.view.makeToast("Please ensure the name field has correct characters (a-z, 0-9)", duration: 3.0, position: .bottom, style: style)
             }
@@ -213,6 +223,19 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
         self.contactTextField.delegate = self
         self.addressTextField.delegate = self
         self.notesTextView.delegate = self
+        self.durationTextField.delegate = self
+        
+        print(appointment)
+        print("COLOR: \(appointment?.colorNumber)")
+        print("DURATIION: \(appointment?.duration)")
+        print("DURATIION S: \(String(describing: appointment?.duration))")
+        
+        (colorPickerControl.subviews[0] as UIView).tintColor = UIColor.blue
+        (colorPickerControl.subviews[1] as UIView).tintColor = UIColor.yellow
+        (colorPickerControl.subviews[2] as UIView).tintColor = UIColor.green
+        (colorPickerControl.subviews[3] as UIView).tintColor = UIColor.red
+        (colorPickerControl.subviews[4] as UIView).tintColor = UIColor.orange
+        (colorPickerControl.subviews[5] as UIView).tintColor = UIColor.magenta
         
         nameOfVisitTextField.text = appointment?.name
         dateTextField.text = appointment?.date
@@ -222,8 +245,14 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
         currentAppointmentID = (appointment?.id)!
         isReminderEnabled = (appointment?.reminder)!
         remindDate = (appointment?.reminderDate)!
+        durationTextField.text = appointment?.duration
+        colorPickerControl.selectedSegmentIndex = Int((appointment?.colorNumber)!)
+        allDaySwitch.isOn = (appointment?.isAllDay)!
+        
         
         UIApplication.shared.applicationIconBadgeNumber = 0
+        
+       
     }
     
     // zabezpieczenie datePickera przed wklejaniem tresci i dodawaniem innych znaków niż te podane poprzez dataPicker

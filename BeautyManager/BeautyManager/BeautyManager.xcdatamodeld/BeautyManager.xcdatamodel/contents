@@ -2,9 +2,12 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="AppointmentEntity" representedClassName="AppointmentEntity" syncable="YES" codeGenerationType="class">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="colorNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="contact" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isAllDay" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="reminder" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
@@ -37,7 +40,7 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AppointmentEntity" positionX="-63" positionY="-18" width="128" height="165"/>
+        <element name="AppointmentEntity" positionX="-63" positionY="-18" width="128" height="210"/>
         <element name="ContactsEntity" positionX="-54" positionY="45" width="128" height="150"/>
         <element name="MeasurementsEntity" positionX="-54" positionY="54" width="128" height="105"/>
         <element name="ShortTipEntity" positionX="-54" positionY="45" width="128" height="75"/>

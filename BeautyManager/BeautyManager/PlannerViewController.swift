@@ -60,6 +60,10 @@ class PlannerViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let notesValue = data.value(forKey: "notes") as! String
                 let reminderValue = data.value(forKey: "reminder") as! Bool
                 let reminderDateValue = data.value(forKey: "reminderDate") as! Date
+                let durationValue = data.value(forKey: "duration") as! String
+                let colorNumberValue = data.value(forKey: "colorNumber") as! Int64
+                let isAllDayValue = data.value(forKey: "isAllDay") as! Bool
+                
                 let stringDate = dateFormatter.string(from: dateValue)
                 let stringReminderDate = dateFormatter.string(from: reminderDateValue)
                 
@@ -72,7 +76,10 @@ class PlannerViewController: UIViewController, UITableViewDelegate, UITableViewD
                     address: addressValue,
                     notes: notesValue,
                     reminder: reminderValue,
-                    reminderDate: stringReminderDate)
+                    reminderDate: stringReminderDate,
+                    duration: durationValue,
+                    colorNumber: colorNumberValue,
+                    isAllDay: isAllDayValue)
                 // dodanie jednej wizyty do tablicy wizyt (do listy)
                 appointments.append(appointment)
             }

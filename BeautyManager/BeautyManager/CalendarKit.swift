@@ -16,20 +16,27 @@ class CalendarKit: DayViewController, DatePickerControllerDelegate {
 
     var visitsArray = [[String]]()
     var dateArray = [Date]()
+    var appointments = [Appointment]()
+    var appointment: Appointment?
     
     var colors = [UIColor.blue,
                   UIColor.yellow,
                   UIColor.green,
-                  UIColor.red]
+                  UIColor.red,
+                  UIColor.orange,
+                  UIColor.magenta]
+    
+    let dateFormatter = DateFormatter()
     
     // wczytanie danych z core data
     @objc func loadCalendarDataFromDB() {
+        appointments.removeAll()
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "AppointmentEntity")
         request.returnsObjectsAsFaults = false
         
-        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         print("Inside DB.. Reading DB")
@@ -38,29 +45,35 @@ class CalendarKit: DayViewController, DatePickerControllerDelegate {
         do {
             let result = try context.fetch(request)
             for data in result as! [NSManagedObject] {
-//                let idValue = data.value(forKey: "id") as! Int64
+                let idValue = data.value(forKey: "id") as! Int64
                 let nameValue = data.value(forKey: "name") as! String
                 let dateValue = data.value(forKey: "date") as! Date
-//                let contactValue = data.value(forKey: "contact") as! String
+                let contactValue = data.value(forKey: "contact") as! String
                 let addressValue = data.value(forKey: "address") as! String
-//                let notesValue = data.value(forKey: "notes") as! String
-//                let reminderValue = data.value(forKey: "reminder") as! Bool
-//                let reminderDateValue = data.value(forKey: "reminderDate") as! Date
+                let notesValue = data.value(forKey: "notes") as! String
+                let reminderValue = data.value(forKey: "reminder") as! Bool
+                let reminderDateValue = data.value(forKey: "reminderDate") as! Date
+                let durationValue = data.value(forKey: "duration") as! String
+                let colorNumberValue = data.value(forKey: "colorNumber") as! Int64
+                let isAllDayValue = data.value(forKey: "isAllDay") as! Bool
                 let stringDate = dateFormatter.string(from: dateValue)
-//                let stringReminderDate = dateFormatter.string(from: reminderDateValue)
+                let stringReminderDate = dateFormatter.string(from: reminderDateValue)
                 
                 // umieszczenie wartości w obiekcie appointment
-//                let appointment = Appointment(
-//                    id: idValue,
-//                    name: "\(nameValue)",
-//                    date: stringDate,
-//                    contact: contactValue,
-//                    address: addressValue,
-//                    notes: notesValue,
-//                    reminder: reminderValue,
-//                    reminderDate: stringReminderDate)
+                let appointment = Appointment(
+                    id: idValue,
+                    name: "\(nameValue)",
+                    date: stringDate,
+                    contact: contactValue,
+                    address: addressValue,
+                    notes: notesValue,
+                    reminder: reminderValue,
+                    reminderDate: stringReminderDate,
+                    duration: durationValue,
+                    colorNumber: colorNumberValue,
+                    isAllDay: isAllDayValue)
                 // dodanie jednej wizyty do tablicy wizyt (do listy)
-//                appointments.append(appointment)
+                appointments.append(appointment)
                 
                 visitsArray.append([nameValue, addressValue])
                 dateArray.append(dateValue)
@@ -69,6 +82,14 @@ class CalendarKit: DayViewController, DatePickerControllerDelegate {
         } catch {
             print("Failed")
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        visitsArray.removeAll()
+        dateArray.removeAll()
+        
+        loadCalendarDataFromDB()
+        reloadData()
     }
     
     override func viewDidLoad() {
@@ -102,6 +123,8 @@ class CalendarKit: DayViewController, DatePickerControllerDelegate {
     
     override func eventsForDate(_ date: Date) -> [EventDescriptor] {
         visitsArray.removeAll()
+        dateArray.removeAll()
+        
         loadCalendarDataFromDB()
         
         var events = [Event]()
@@ -111,7 +134,10 @@ class CalendarKit: DayViewController, DatePickerControllerDelegate {
         for i in 0...visitsArray.count-1 {
             let event = Event()
             var visitDate = dateArray[i]
-            let duration: Int = 60
+            
+            print("Visit date: \(visitDate)")
+            
+            let duration: Int = Int(appointments[i].duration)!
             var chunk = TimeChunk.dateComponents(minutes: duration)
             let datePeriod = TimePeriod(beginning: visitDate,
                                         chunk: chunk)
@@ -122,10 +148,11 @@ class CalendarKit: DayViewController, DatePickerControllerDelegate {
             var info = visitsArray[i]
             
             event.text = info.reduce("", {$0 + $1 + "\n"})
-            event.color = colors[Int(arc4random_uniform(UInt32(colors.count)))]
-            event.isAllDay = false
+            event.color = colors[Int(appointments[i].colorNumber)]
+            event.isAllDay = appointments[i].isAllDay
             events.append(event)
-            event.userInfo = String(i)
+            event.userInfo = Int(appointments[i].id)
+            print("Event user info: \(event.userInfo)")
         }
         
         return events
@@ -150,12 +177,34 @@ class CalendarKit: DayViewController, DatePickerControllerDelegate {
         guard let descriptor = eventView.descriptor as? Event else {
             return
         }
-        let mainTitle = "Event \(descriptor.startDate)"
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateFromString = dateFormatter.string(from: descriptor.startDate)
+        
+        let mainTitle = "\(dateFromString)"
         let question = descriptor.text
         let popupDialog = PopupDialog(title: mainTitle, message: question)
-        let cancelButton = CancelButton(title: "CLOSE") {
+        
+//        var myInt: Int = 0
+//        var string: String = ""
+        
+        // BUTTON CANCEL
+        let cancelButton = CancelButton(title: "CANCEL") {
         }
-        popupDialog.addButtons([cancelButton])
+        
+        // BUTTON SHOW MORE
+        let yesButton = DefaultButton(title: "SHOW MORE", dismissOnTap: true) {
+//            print("User info: \(descriptor.userInfo)")
+//            string = String(describing: descriptor.userInfo)
+//            print("String: \(string)")
+//            myInt = Int(string)!
+//            print("INT: \(myInt)")
+//            self.appointment = self.appointments[1]
+            
+            
+            self.tabBarController?.selectedIndex = 0
+        }
+        popupDialog.addButtons([cancelButton, yesButton])
         self.present(popupDialog, animated: true, completion: nil)
     }
     
