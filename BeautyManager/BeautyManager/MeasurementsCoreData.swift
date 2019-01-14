@@ -17,15 +17,11 @@ class MeasurementsCoreData {
     func addMeasurement(resultBMIValue: Double, weightValue: Double, dateValue: String){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
-        
         let entity = NSEntityDescription.entity(forEntityName: "MeasurementsEntity", in: context)
         let newMeasurement = NSManagedObject(entity: entity!, insertInto: context)
-        
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateFromString = dateFormatter.date(from: dateValue)
-        
         let newID = findMaximumID() + 1
-        print("NEW ID: \(newID)")
         
         newMeasurement.setValue(newID, forKey: "id")
         newMeasurement.setValue(resultBMIValue, forKey: "resultBMI")
@@ -34,7 +30,6 @@ class MeasurementsCoreData {
         
         do {
             try context.save()
-            print("saved!")
         }
         catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
@@ -46,10 +41,8 @@ class MeasurementsCoreData {
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MeasurementsEntity")
         request.returnsObjectsAsFaults = false
-        
         let predicate = NSPredicate(format: "id == \(id)")
         request.predicate = predicate
-        
         let result = try? context.fetch(request)
         let resultData = result as! [MeasurementsEntity]
         
@@ -59,7 +52,6 @@ class MeasurementsCoreData {
         
         do {
             try context.save()
-            print("saved!")
         }
         catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
@@ -71,27 +63,20 @@ class MeasurementsCoreData {
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MeasurementsEntity")
         request.returnsObjectsAsFaults = false
-        
         let predicate = NSPredicate(format: "id == \(id)")
         request.predicate = predicate
-        
         let result = try? context.fetch(request)
         let resultData = result as! [MeasurementsEntity]
         
         if resultData.count != 0 {
-
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let dateFromString = dateFormatter.date(from: dateValue)
-            
             resultData[0].setValue(resultBMIValue, forKey: "resultBMI")
             resultData[0].setValue(weightValue, forKey: "weight")
             resultData[0].setValue(dateFromString, forKey: "date")
             
-            print(id)
-            
             do {
                 try context.save()
-                print("saved!")
             } catch let error as NSError {
                 print("Could not save \(error), \(error.userInfo)")
             }
@@ -103,19 +88,17 @@ class MeasurementsCoreData {
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MeasurementsEntity")
         request.returnsObjectsAsFaults = false
-        
         let result = try? context.fetch(request)
         let resultData = result as! [MeasurementsEntity]
-        
         var currentID:Int64 = 0
         var maxID:Int64 = 0
+        
         for object in resultData {
             currentID = object.id
             if currentID > maxID {
                 maxID = currentID
             }
         }
-        //print("MAX ID: \(maxID)")
         return maxID
     }
     
@@ -124,7 +107,6 @@ class MeasurementsCoreData {
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MeasurementsEntity")
         request.returnsObjectsAsFaults = false
-        
         let result = try? context.fetch(request)
         let resultData = result as! [MeasurementsEntity]
         
@@ -134,15 +116,9 @@ class MeasurementsCoreData {
         
         do {
             try context.save()
-            print("saved!")
         }
         catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
         }
-    }
-    
-    
-    
-    
-    
+    }    
 }

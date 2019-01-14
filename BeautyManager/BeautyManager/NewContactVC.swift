@@ -18,7 +18,6 @@ class NewContactVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
     let alphabetRule: CharacterSet = ["0","1","2","3","4","5","6","7","8","9", "a", "ą", "b", "c", "ć", "d", "e", "ę", "f", "g", "h", "i", "j", "k", "l", "ł", "m", "n", "ń", "o", "ó", "p", "q", "r", "s", "ś", "t", "u", "v", "w", "x", "y", "z", "ź", "ż", " ", "-"]
 
-    
     @IBOutlet weak var contactNameTextField: UITextField!
     @IBOutlet weak var contactTextField: UITextField!
     @IBOutlet weak var mailTextField: UITextField!
@@ -31,7 +30,6 @@ class NewContactVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
         // red
         style.backgroundColor = UIColor(red: 255.0/255.0, green: 50.0/255.0, blue: 0.0/255.0, alpha: 1.0)
         style.messageColor = .white
-        
         let finalSet = CharacterSet.letters.union(alphabetRule)
         
         if (contactNameTextField.text != "" && contactTextField.text != "") {
@@ -42,8 +40,6 @@ class NewContactVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
                                                   mailValue: mailTextField.text!,
                                                   firstNameValue: firstNameTextField.text!,
                                                   lastNameValue: lastNameTextField.text!)
-                
-                print("Contact added")
                 navigateToContactsListView()
             } else {
                 self.view.makeToast("Please ensure the name of contact field has correct characters (a-z, 0-9)", duration: 3.0, position: .bottom, style: style)
@@ -60,14 +56,11 @@ class NewContactVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(NewContactVC.viewTapped(gestureRecognize:)))
         view.addGestureRecognizer(tapGesture)
-        
         self.hideKeyboardWhenTappedAround()
     }
     
-    // handler method
     @objc func viewTapped(gestureRecognize: UITapGestureRecognizer) {
         view.endEditing(true)
     }
@@ -82,4 +75,15 @@ class NewContactVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
         super.didReceiveMemoryWarning()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        let nav = self.navigationController?.navigationBar
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "te", style: .done, target: self, action: nil)
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        imageView.contentMode = .scaleAspectFit
+        imageView.center = nav!.center
+        let image = UIImage(named: "Colorfull")
+        imageView.image = image
+        navigationItem.titleView = imageView
+    }
 }

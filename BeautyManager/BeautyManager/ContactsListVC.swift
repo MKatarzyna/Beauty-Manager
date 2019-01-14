@@ -14,6 +14,7 @@ class ContactsListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var selectContact: UIBarButtonItem!
     @IBOutlet weak var editContact: UIBarButtonItem!
+    @IBOutlet weak var tableView: UITableView!
     
     // na pasku navigacyjnym -> przenosi do edycji
     @IBAction func editContact(_ sender: Any) {
@@ -25,27 +26,21 @@ class ContactsListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         print(phoneNumber)
         performSegue(withIdentifier: "CloseContactsList", sender: self)
     }
-    
-    @IBOutlet weak var tableView: UITableView!
-    
+
     var contactsArray = [Contact]()
     var selectedRow: Int = -1
     var phoneNumber: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         tableView.delegate = self
         tableView.dataSource = self
-        // na starcie nie można ich użyć, są wyłączone
         editContact.isEnabled = false
         selectContact.isEnabled = false
     }
-    
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         contactsArray.removeAll()
         loadContactsDataFromDB()
         tableView.reloadData()
@@ -71,8 +66,6 @@ class ContactsListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                 let mailValue = data.value(forKey: "mail") as! String
                 let firstNameValue = data.value(forKey: "firstName") as! String
                 let lastNameValue = data.value(forKey: "lastName") as! String
-                
-                print("ID value: \(idValue)")
                 
                // umieszczenie wartości w obiekcie contacts
                 let contact = Contact(
@@ -103,17 +96,11 @@ class ContactsListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell!
     }
     
-    
     // jesli wiersz został zaznaczony/klikniety to wykonaj przejscie (segue) o nazwie showContactDetails
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
         editContact.isEnabled = true
         selectContact.isEnabled = true
         selectedRow = indexPath.row
-    }
-    
-    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        print("SELECT")
     }
 
     // wysłanie elementu z tablicy contacts dla zaznaczonego wiersza
@@ -121,5 +108,5 @@ class ContactsListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         if let destination = segue.destination as? EditContactVC {
             destination.contact = contactsArray[(tableView.indexPathForSelectedRow?.row)!]
         }
-    } 
+    }
 }

@@ -10,12 +10,10 @@ import Foundation
 import UIKit
 
 class Measurement {
-    
     var id: Int64
     var resultBMI: Double
     var weight: Double
     var date: Date
-    
     
     init(id: Int64, resultBMI: Double, weight: Double, date: Date)
     {

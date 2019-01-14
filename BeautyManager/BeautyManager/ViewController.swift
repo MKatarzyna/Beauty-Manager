@@ -12,14 +12,11 @@ import PopupDialog
 import UserNotifications
 
 class ViewController: UIViewController {
-
     var shortTipsArray = [ShortTips]()
     
     @IBAction func showMeShortTip(_ sender: Any) {
         var sizeOfArray: Int = shortTipsArray.count
-        print(sizeOfArray)
         let numberOfShortTip = Int.random(in: 0...(sizeOfArray - 1))
-        
         let mainTitle = "Short tip"
         let shortTipMessage = shortTipsArray[numberOfShortTip].shortTip
         let popupDialog = PopupDialog(title: mainTitle, message: shortTipMessage)
@@ -31,7 +28,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadShortTipDataFromDB()
-        
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in})
         UIApplication.shared.applicationIconBadgeNumber = 0
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
@@ -47,12 +43,10 @@ class ViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // pobieranie danych z bazy danych ShortTip
     @objc func loadShortTipDataFromDB() {
-        print("Loading...")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ShortTipEntity")
@@ -60,7 +54,6 @@ class ViewController: UIViewController {
         
         // pobranie wszystkich wartości atrybutów z encji
         do {
-            print("do...")
             let result = try context.fetch(request)
             for data in result as! [NSManagedObject] {
                 let idValue = data.value(forKey: "id") as! Int64
@@ -78,4 +71,3 @@ class ViewController: UIViewController {
         }
     }
 }
-

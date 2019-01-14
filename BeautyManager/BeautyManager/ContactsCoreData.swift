@@ -16,12 +16,9 @@ class ContactsCoreData {
     func addContact(addressValue: String, contactValue: String, contactNameValue: String, mailValue: String, firstNameValue: String, lastNameValue: String) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
-        
         let entity = NSEntityDescription.entity(forEntityName: "ContactsEntity", in: context)
         let newContact = NSManagedObject(entity: entity!, insertInto: context)
-        
         let newID = findMaximumID() + 1
-        print("NEW ID: \(newID)")
         
         newContact.setValue(newID, forKey: "id")
         newContact.setValue(addressValue, forKey: "address")
@@ -46,10 +43,8 @@ class ContactsCoreData {
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ContactsEntity")
         request.returnsObjectsAsFaults = false
-        
         let predicate = NSPredicate(format: "id == \(id)")
         request.predicate = predicate
-        
         let result = try? context.fetch(request)
         let resultData = result as! [ContactsEntity]
         
@@ -74,16 +69,12 @@ class ContactsCoreData {
                        mailValue: String,
                        firstNameValue: String,
                        lastNameValue: String) {
-        print("MODIFY jestem: ID \(id)")
-        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ContactsEntity")
         request.returnsObjectsAsFaults = false
-        
         let predicate = NSPredicate(format: "id == \(id)")
         request.predicate = predicate
-        
         let result = try? context.fetch(request)
         let resultData = result as! [ContactsEntity]
         
@@ -109,12 +100,11 @@ class ContactsCoreData {
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ContactsEntity")
         request.returnsObjectsAsFaults = false
-        
         let result = try? context.fetch(request)
         let resultData = result as! [ContactsEntity]
-        
         var currentID:Int64 = 0
         var maxID:Int64 = 0
+        
         for object in resultData {
             currentID = object.id
             if currentID > maxID {
@@ -130,7 +120,6 @@ class ContactsCoreData {
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ContactsEntity")
         request.returnsObjectsAsFaults = false
-        
         let result = try? context.fetch(request)
         let resultData = result as! [ContactsEntity]
         

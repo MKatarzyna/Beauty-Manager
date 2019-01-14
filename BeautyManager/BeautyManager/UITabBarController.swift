@@ -10,7 +10,6 @@ import UIKit
 import Foundation
 
 extension UINavigationController {
-    
     override open var shouldAutorotate: Bool {
         get {
             if let visibleVC = visibleViewController {
@@ -43,8 +42,6 @@ class UITabBarController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        //    deleteAppointment(id: 4)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +54,5 @@ class UITabBarController: UINavigationController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }

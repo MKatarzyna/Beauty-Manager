@@ -12,30 +12,36 @@ import CoreData
 import UserNotifications
 
 class PlannerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
     @IBOutlet weak var tableView: UITableView!
-    
     var appointments = [Appointment]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.delegate = self
         tableView.dataSource = self
-        
         UIApplication.shared.applicationIconBadgeNumber = 0
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         appointments.removeAll()
         loadPlannerDataFromDB()
         tableView.reloadData()
-        
         UIApplication.shared.applicationIconBadgeNumber = 0
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let nav = self.navigationController?.navigationBar
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "te", style: .done, target: self, action: nil)
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.clear
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        imageView.contentMode = .scaleAspectFit
+        imageView.center = nav!.center
+        let image = UIImage(named: "Colorfull")
+        imageView.image = image
+        navigationItem.titleView = imageView
     }
     
     // wczytanie danych z core data
@@ -44,7 +50,6 @@ class PlannerViewController: UIViewController, UITableViewDelegate, UITableViewD
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "AppointmentEntity")
         request.returnsObjectsAsFaults = false
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
@@ -63,7 +68,6 @@ class PlannerViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let durationValue = data.value(forKey: "duration") as! String
                 let colorNumberValue = data.value(forKey: "colorNumber") as! Int64
                 let isAllDayValue = data.value(forKey: "isAllDay") as! Bool
-                
                 let stringDate = dateFormatter.string(from: dateValue)
                 let stringReminderDate = dateFormatter.string(from: reminderDateValue)
                 

@@ -17,19 +17,14 @@ class ShortTipsCoreData {
     func addShortTip(shortTipValue: String){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
-        
         let entity = NSEntityDescription.entity(forEntityName: "ShortTipEntity", in: context)
         let newShortTip = NSManagedObject(entity: entity!, insertInto: context)
-        
         let newID = findMaximumID() + 1
-        print("NEW ID: \(newID)")
-        
         newShortTip.setValue(newID, forKey: "id")
         newShortTip.setValue(shortTipValue, forKey: "shortTip")
         
         do {
             try context.save()
-            print("saved!")
         }
         catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
@@ -42,10 +37,8 @@ class ShortTipsCoreData {
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ShortTipEntity")
         request.returnsObjectsAsFaults = false
-        
         let predicate = NSPredicate(format: "id == \(id)")
         request.predicate = predicate
-        
         let result = try? context.fetch(request)
         let resultData = result as! [ShortTipEntity]
         
@@ -55,7 +48,6 @@ class ShortTipsCoreData {
         
         do {
             try context.save()
-            print("saved!")
         }
         catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
@@ -68,20 +60,15 @@ class ShortTipsCoreData {
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ShortTipEntity")
         request.returnsObjectsAsFaults = false
-        
         let predicate = NSPredicate(format: "id == \(id)")
         request.predicate = predicate
-        
         let result = try? context.fetch(request)
         let resultData = result as! [ShortTipEntity]
         
         if resultData.count != 0 {
-            
             resultData[0].setValue(shortTipValue, forKey: "shortTip")
-            
             do {
                 try context.save()
-                print("saved!")
             } catch let error as NSError {
                 print("Could not save \(error), \(error.userInfo)")
             }
@@ -94,10 +81,8 @@ class ShortTipsCoreData {
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ShortTipEntity")
         request.returnsObjectsAsFaults = false
-        
         let result = try? context.fetch(request)
         let resultData = result as! [ShortTipEntity]
-        
         var currentID:Int64 = 0
         var maxID:Int64 = 0
         for object in resultData {
@@ -115,21 +100,17 @@ class ShortTipsCoreData {
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ShortTipEntity")
         request.returnsObjectsAsFaults = false
-        
         let result = try? context.fetch(request)
         let resultData = result as! [ShortTipEntity]
-        
         for object in resultData {
             context.delete(object)
         }
         
         do {
             try context.save()
-            print("saved!")
         }
         catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
         }
     }
 }
-

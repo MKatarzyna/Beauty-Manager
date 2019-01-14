@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 class ShortTips {
-    
     var id: Int64
     var shortTip: String
     

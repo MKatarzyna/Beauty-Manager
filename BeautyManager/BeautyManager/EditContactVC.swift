@@ -23,7 +23,6 @@ class EditContactVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     var style = ToastStyle()
     var contact: Contact?
     var currentContactID: Int64 = 0
-//    var nameOfWindow: String = ""
     
     let alphabetRule: CharacterSet = ["0","1","2","3","4","5","6","7","8","9", "a", "ą", "b", "c", "ć", "d", "e", "ę", "f", "g", "h", "i", "j", "k", "l", "ł", "m", "n", "ń", "o", "ó", "p", "q", "r", "s", "ś", "t", "u", "v", "w", "x", "y", "z", "ź", "ż", " ", "-"]
 
@@ -54,12 +53,10 @@ class EditContactVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
         // red
         style.backgroundColor = UIColor(red: 255.0/255.0, green: 50.0/255.0, blue: 0.0/255.0, alpha: 1.0)
         style.messageColor = .white
-        
         let finalSet = CharacterSet.letters.union(alphabetRule)
         
         if (contactNameTextField.text != "" && contactTextField.text != "") {
             if (finalSet.isSuperset(of: CharacterSet(charactersIn: contactNameTextField.text!)) == true) {
-                
                 let mainTitle = "Modifying contact"
                 let question = "Do you want to modify this contact?"
                 let popupDialog = PopupDialog(title: mainTitle, message: question)
@@ -78,8 +75,6 @@ class EditContactVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
                                                      mailValue: self.mailTextField.text!,
                                                      firstNameValue: self.firstNameTextField.text!,
                                                      lastNameValue: self.lastNameTextField.text!)
-                    
-                    print("Contact modified")
                     self.navigateToContactsListView()
                 }
                 
@@ -91,16 +86,13 @@ class EditContactVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
         } else {
             self.view.makeToast("Please populate the name of contact and phone number fields!", duration: 3.0, position: .bottom, style: style)
         }
-        
     }
 
     // wyświeltanie danych dla zaznaczonego wiersza
     override func viewDidLoad() {
         super.viewDidLoad()
-
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(EditContactVC.viewTapped(gestureRecognize:)))
         view.addGestureRecognizer(tapGesture)
-        
         self.hideKeyboardWhenTappedAround()
         
         // use this to hide keyboard while pressing return on keyboard
@@ -120,7 +112,6 @@ class EditContactVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
         lastNameTextField.text = contact?.lastName
     }
     
-    // handler method
     @objc func viewTapped(gestureRecognize: UITapGestureRecognizer) {
         view.endEditing(true)
     }
@@ -134,6 +125,15 @@ class EditContactVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
         super.didReceiveMemoryWarning()
     }
     
-
-    
+    override func viewDidAppear(_ animated: Bool) {
+        let nav = self.navigationController?.navigationBar
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "te", style: .done, target: self, action: nil)
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        imageView.contentMode = .scaleAspectFit
+        imageView.center = nav!.center
+        let image = UIImage(named: "Colorfull")
+        imageView.image = image
+        navigationItem.titleView = imageView
+    } 
 }

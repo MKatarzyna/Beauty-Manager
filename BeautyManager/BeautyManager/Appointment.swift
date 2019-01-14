@@ -10,9 +10,8 @@ import Foundation
 import UIKit
 
 class Appointment {
-    
     var name: String
-    var date: String // zastosować datePicker do wyboru daty
+    var date: String
     var contact: String
     var address: String
     var notes: String

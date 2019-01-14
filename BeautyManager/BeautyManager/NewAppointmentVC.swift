@@ -25,7 +25,6 @@ class NewAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelegat
     @IBOutlet weak var contactTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var notesTextView: UITextView!
-    
     private var datePicker: UIDatePicker?
     
     // umożliwia wyłączenie okienka i przejście do poprzedniego poprzez segue. Odbiera zmienną phoneNumber z zamkniętego okienka
@@ -39,11 +38,9 @@ class NewAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelegat
     }
     
     @IBAction func addNewAppointment(_ sender: Any) {
-        
         // red
         style.backgroundColor = UIColor(red: 255.0/255.0, green: 50.0/255.0, blue: 0.0/255.0, alpha: 1.0)
         style.messageColor = .white
-        
         let finalSet = CharacterSet.letters.union(alphabetRule)
         
         if (nameTextField.text != "" && dateTextField.text != "") {
@@ -58,8 +55,6 @@ class NewAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelegat
                                                             durationValue: "60",
                                                             colorNumberValue: 0,
                                                             isAllDayValue: false)
-                
-                print("Appointment added")
                 navigateToPreviousView()
             } else {
                 self.view.makeToast("Please ensure the name field has correct characters (a-z, 0-9)", duration: 3.0, position: .bottom, style: style)
@@ -76,14 +71,12 @@ class NewAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .dateAndTime
         datePicker?.addTarget(self, action: #selector(NewAppointmentVC.dateChanged(datePicker:)), for: .valueChanged)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(NewAppointmentVC.viewTapped(gestureRecognize:)))
         view.addGestureRecognizer(tapGesture)
         dateTextField.inputView = datePicker
-        
         self.hideKeyboardWhenTappedAround()
         
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -92,7 +85,6 @@ class NewAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelegat
     
     // zabezpieczenie datePickera przed wklejaniem tresci i dodawaniem innych znaków niż te podane poprzez dataPicker
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
         if textField == dateTextField {
             return false
         }
@@ -119,5 +111,17 @@ class NewAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelegat
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let nav = self.navigationController?.navigationBar
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "test", style: .done, target: self, action: nil)
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        imageView.contentMode = .scaleAspectFit
+        imageView.center = nav!.center
+        let image = UIImage(named: "Colorfull")
+        imageView.image = image
+        navigationItem.titleView = imageView
     }
 }

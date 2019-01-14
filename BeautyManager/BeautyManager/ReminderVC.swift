@@ -12,28 +12,26 @@ import Toast_Swift
 import PopupDialog
 
 class ReminderVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
-
     var visitDate: String = ""
     var style = ToastStyle()
     var remindDate: String = ""
     var isReminderEnabled: Bool = false
     private var datePicker: UIDatePicker?
-    
 
-    
     @IBOutlet weak var visitDateTextField: UITextField!
     @IBOutlet weak var reminderTextField: UITextField!
     @IBOutlet weak var switchReminder: UISwitch!
     
-    
     @IBAction func confirmReminder(_ sender: Any) {
-        
         if (switchReminder.isOn == true) {
             if (reminderTextField.text != "") {
                 isReminderEnabled = switchReminder.isOn
                 performSegue(withIdentifier: "CloseReminderWindow", sender: self)
             } else {
-                self.view.makeToast("Choose the date if you want turn ON reminder.", duration: 3.0, position: .bottom, style: style)
+                self.view.makeToast("Choose the date if you want turn ON reminder.",
+                                    duration: 3.0,
+                                    position: .bottom,
+                                    style: style)
             }
         } else {
             isReminderEnabled = switchReminder.isOn
@@ -47,28 +45,27 @@ class ReminderVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         visitDateTextField.text = visitDate
         reminderTextField.text = remindDate
         switchReminder.isOn = isReminderEnabled
         
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .dateAndTime
-        datePicker?.addTarget(self, action: #selector(ReminderVC.dateChanged(datePicker:)), for: .valueChanged)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ReminderVC.viewTapped(gestureRecognize:)))
+        datePicker?.addTarget(self,
+                              action: #selector(ReminderVC.dateChanged(datePicker:)),
+                              for: .valueChanged)
+        let tapGesture = UITapGestureRecognizer(target: self,
+                                                action: #selector(ReminderVC.viewTapped(gestureRecognize:)))
         view.addGestureRecognizer(tapGesture)
         reminderTextField.inputView = datePicker
-        
+    
         self.hideKeyboardWhenTappedAround()
-        
-        // use this to hide keyboard while pressing return on keyboard
         self.reminderTextField.delegate = self
         self.visitDateTextField.delegate = self
     }
     
     // zabezpieczenie datePickera przed wklejaniem tresci i dodawaniem innych znaków niż te podane poprzez dataPicker
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
         if textField == reminderTextField {
             return false
         }
@@ -77,7 +74,6 @@ class ReminderVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
         }
     }
     
-    // handler method
     @objc func viewTapped(gestureRecognize: UITapGestureRecognizer) {
         view.endEditing(true)
     }
@@ -94,4 +90,15 @@ class ReminderVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
         return false
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        let nav = self.navigationController?.navigationBar
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "te", style: .done, target: self, action: nil)
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        imageView.contentMode = .scaleAspectFit
+        imageView.center = nav!.center
+        let image = UIImage(named: "Colorfull")
+        imageView.image = image
+        navigationItem.titleView = imageView
+    } 
 }

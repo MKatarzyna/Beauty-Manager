@@ -12,9 +12,7 @@ import Toast_Swift
 import PopupDialog
 import UserNotifications
 
-
 class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
-    
     @IBOutlet weak var nameOfVisitTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var contactTextField: UITextField!
@@ -25,17 +23,16 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
     @IBOutlet weak var colorPickerControl: UISegmentedControl!
     
     private var datePicker: UIDatePicker?
-    
     var style = ToastStyle()
     var appointment: Appointment?
     var phoneNumber: String = ""
     var remindDate: String = ""
     var isReminderEnabled: Bool = false
+    var currentAppointmentID: Int64 = 0
     
     let calendar = Calendar.current
     let dateFormatter = DateFormatter()
     let alphabetRule: CharacterSet = ["0","1","2","3","4","5","6","7","8","9", "a", "ą", "b", "c", "ć", "d", "e", "ę", "f", "g", "h", "i", "j", "k", "l", "ł", "m", "n", "ń", "o", "ó", "p", "q", "r", "s", "ś", "t", "u", "v", "w", "x", "y", "z", "ź", "ż", " ", "-"]
-    var currentAppointmentID: Int64 = 0
     
     // umożliwia wyłączenie okienka i przejście do poprzedniego poprzez segue. Odbiera zmienną phoneNumber z zamkniętego okienka
     @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue) {
@@ -54,7 +51,6 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
     }
     
     @IBAction func sendSMS(_ sender: Any) {
-        print("Enabled: \(isReminderEnabled), Remind Date: \(remindDate)")
         // POPUP DIALOG
         let mainTitle = "Sending SMS"
         let question = "Choose a template for SMS:"
@@ -66,21 +62,18 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
             let sms: String = "sms:" + self.contactTextField.text! + "&body=Hello, I want to confirm my visit at " + self.dateTextField.text! + "."
             let strURL: String = sms.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
             UIApplication.shared.open(URL.init(string: strURL)!, options: [:], completionHandler: nil)
-//            self.navigateToPreviousView()
         }
         
         let cancelSmsButton = DefaultButton(title: "Cancel a visit", dismissOnTap: true) {
             let sms: String = "sms:" + self.contactTextField.text! + "&body=Hello, I want to cancel my visit at " + self.dateTextField.text! + "."
             let strURL: String = sms.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
             UIApplication.shared.open(URL.init(string: strURL)!, options: [:], completionHandler: nil)
-//            self.navigateToPreviousView()
         }
         
         let questionSmsButton = DefaultButton(title: "Book a visit", dismissOnTap: true) {
             let sms: String = "sms:" + self.contactTextField.text! + "&body=Hello, I want to book a visit at " + self.dateTextField.text! + ". Could you let me know, please?"
             let strURL: String = sms.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
             UIApplication.shared.open(URL.init(string: strURL)!, options: [:], completionHandler: nil)
-            //            self.navigateToPreviousView()
         }
         popupDialog.addButtons([cancelButton, confirmSmsButton, cancelSmsButton, questionSmsButton])
         self.present(popupDialog, animated: true, completion: nil)
@@ -92,14 +85,12 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
         let question = "Do you want to remove appointment?"
         let popupDialog = PopupDialog(title: mainTitle, message: question)
         let cancelButton = CancelButton(title: "CANCEL") {
-            print("You canceled the removing of appointment.")
             self.view.makeToast("You canceled the removing of appointment.", duration: 3.0, position: .bottom)
         }
         let yesButton = DefaultButton(title: "YES", dismissOnTap: true) {
             self.turnOffReminder()
             CoreDataOperations().removeAppointment(
                 id: self.currentAppointmentID)
-            print("Appointment removed")
             self.navigateToPreviousView()
         }
         popupDialog.addButtons([cancelButton, yesButton])
@@ -108,9 +99,6 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
     
     func turnOffReminder() {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["reminderID\(appointment?.id)"])
-        print("OFF")
-        print("reminderID\(appointment?.id)")
-        
     }
     
     func turnOnReminder() {
@@ -119,10 +107,8 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
         content.subtitle = (appointment?.date)!
         content.body = (appointment?.address)!
         content.badge = 1
-        
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let dateFromString = dateFormatter.date(from: remindDate)
-        
         var date = DateComponents()
         date.year = calendar.component(.year, from: dateFromString!)
         date.day = calendar.component(.day, from: dateFromString!)
@@ -132,20 +118,14 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
         let request = UNNotificationRequest(identifier: "reminderID\(appointment?.id)", content: content, trigger: trigger)
-
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-        print("ON")
-        print("reminderID\(appointment?.id)")
     }
-    
     
     // zapisanie zedytowanych pól w jednej wizycie w DB
     @IBAction func modifyAppointment(_ sender: Any) {
-       
         // red
         style.backgroundColor = UIColor(red: 255.0/255.0, green: 50.0/255.0, blue: 0.0/255.0, alpha: 1.0)
         style.messageColor = .white
-        
         let finalSet = CharacterSet.letters.union(alphabetRule)
         let numbersSet = CharacterSet.decimalDigits
         
@@ -155,9 +135,7 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
                     let mainTitle = "Modifying appointment"
                     let question = "Do you want to modify appointment?"
                     let popupDialog = PopupDialog(title: mainTitle, message: question)
-                
                     let cancelButton = CancelButton(title: "CANCEL") {
-                        print("You canceled the modifying of appointment.")
                         self.view.makeToast("You canceled the modifying of appointment.", duration: 3.0, position: .bottom)
                     }
                 
@@ -175,15 +153,11 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
                             colorNumberValue: Int64(self.colorPickerControl!.selectedSegmentIndex),
                             isAllDayValue: self.allDaySwitch.isOn)
                         
-                        print("RemindDate: \(self.remindDate)")
-                        
                         if (self.isReminderEnabled == true) {
                             self.turnOnReminder()
                         } else {
                             self.turnOffReminder()
                         }
-                        
-                        print("Appointment modified")
                         self.navigateToPreviousView()
                     }
 
@@ -207,14 +181,12 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
     // wyświeltanie danych dla zaznaczonego wiersza
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .dateAndTime
         datePicker?.addTarget(self, action: #selector(EditAppointmentVC.dateChanged(datePicker:)), for: .valueChanged)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(EditAppointmentVC.viewTapped(gestureRecognize:)))
         view.addGestureRecognizer(tapGesture)
         dateTextField.inputView = datePicker
-        
         self.hideKeyboardWhenTappedAround()
         
         // use this to hide keyboard while pressing return on keyboard
@@ -224,11 +196,6 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
         self.addressTextField.delegate = self
         self.notesTextView.delegate = self
         self.durationTextField.delegate = self
-        
-        print(appointment)
-        print("COLOR: \(appointment?.colorNumber)")
-        print("DURATIION: \(appointment?.duration)")
-        print("DURATIION S: \(String(describing: appointment?.duration))")
         
         (colorPickerControl.subviews[0] as UIView).tintColor = UIColor.blue
         (colorPickerControl.subviews[1] as UIView).tintColor = UIColor.yellow
@@ -248,16 +215,11 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
         durationTextField.text = appointment?.duration
         colorPickerControl.selectedSegmentIndex = Int((appointment?.colorNumber)!)
         allDaySwitch.isOn = (appointment?.isAllDay)!
-        
-        
         UIApplication.shared.applicationIconBadgeNumber = 0
-        
-       
     }
     
     // zabezpieczenie datePickera przed wklejaniem tresci i dodawaniem innych znaków niż te podane poprzez dataPicker
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
         if textField == dateTextField {
             return false
         }
@@ -266,7 +228,6 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
         }
     }
 
-    // handler method
     @objc func viewTapped(gestureRecognize: UITapGestureRecognizer) {
         view.endEditing(true)
     }
@@ -286,7 +247,6 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // wysłanie elementu z tablicy contacts dla zaznaczonego wiersza
@@ -297,4 +257,16 @@ class EditAppointmentVC: UIViewController, UITextFieldDelegate, UITextViewDelega
             destination.isReminderEnabled = isReminderEnabled
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let nav = self.navigationController?.navigationBar
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "te", style: .done, target: self, action: nil)
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        imageView.contentMode = .scaleAspectFit
+        imageView.center = nav!.center
+        let image = UIImage(named: "Colorfull")
+        imageView.image = image
+        navigationItem.titleView = imageView
+    } 
 }

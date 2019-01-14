@@ -11,7 +11,6 @@
 		440CB7F621B98AEA006F5168 /* CalendarKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CB7F521B98AEA006F5168 /* CalendarKit.swift */; };
 		441D825021CFC91100D54676 /* ExamplesDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D824F21CFC91100D54676 /* ExamplesDefaults.swift */; };
 		441D825221CFC96000D54676 /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D825121CFC96000D54676 /* Env.swift */; };
-		4429EA26217218BD003BDDF3 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429EA25217218BD003BDDF3 /* Toast.swift */; };
 		4429EA282173930A003BDDF3 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4429EA272173930A003BDDF3 /* UITabBarController.swift */; };
 		4436CB1120CAF62B00FB7E9F /* BMIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4436CB1020CAF62B00FB7E9F /* BMIViewController.swift */; };
 		443B97B821DA626800B56B40 /* ReminderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443B97B721DA626800B56B40 /* ReminderVC.swift */; };
@@ -39,6 +38,7 @@
 		447D8BEF21D682B800D523D6 /* ChartSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D8BEE21D682B800D523D6 /* ChartSettingsVC.swift */; };
 		447D8BF121D7C8C500D523D6 /* ShortTipsCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D8BF021D7C8C500D523D6 /* ShortTipsCoreData.swift */; };
 		447D8BF321D7CDAA00D523D6 /* ShortTips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D8BF221D7CDAA00D523D6 /* ShortTips.swift */; };
+		448134C521ECA1A20075168E /* MeasurementsMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448134C421ECA1A20075168E /* MeasurementsMenuVC.swift */; };
 		44A3745720CD5774007FF551 /* NewAppointmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A3745620CD5774007FF551 /* NewAppointmentVC.swift */; };
 		44A3745920CD671C007FF551 /* CoreDataOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A3745820CD671C007FF551 /* CoreDataOperations.swift */; };
 		44B017E820D849CE00F025EE /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B017E720D849CE00F025EE /* ChartData.swift */; };
@@ -59,7 +59,6 @@
 		440CB7F521B98AEA006F5168 /* CalendarKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarKit.swift; sourceTree = "<group>"; };
 		441D824F21CFC91100D54676 /* ExamplesDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesDefaults.swift; sourceTree = "<group>"; };
 		441D825121CFC96000D54676 /* Env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Env.swift; sourceTree = "<group>"; };
-		4429EA25217218BD003BDDF3 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		4429EA272173930A003BDDF3 /* UITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarController.swift; sourceTree = "<group>"; };
 		4436CB1020CAF62B00FB7E9F /* BMIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMIViewController.swift; sourceTree = "<group>"; };
 		443B97B721DA626800B56B40 /* ReminderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderVC.swift; sourceTree = "<group>"; };
@@ -89,6 +88,7 @@
 		447D8BEE21D682B800D523D6 /* ChartSettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartSettingsVC.swift; sourceTree = "<group>"; };
 		447D8BF021D7C8C500D523D6 /* ShortTipsCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortTipsCoreData.swift; sourceTree = "<group>"; };
 		447D8BF221D7CDAA00D523D6 /* ShortTips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortTips.swift; sourceTree = "<group>"; };
+		448134C421ECA1A20075168E /* MeasurementsMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementsMenuVC.swift; sourceTree = "<group>"; };
 		44A3745620CD5774007FF551 /* NewAppointmentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAppointmentVC.swift; sourceTree = "<group>"; };
 		44A3745820CD671C007FF551 /* CoreDataOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataOperations.swift; sourceTree = "<group>"; };
 		44B017E720D849CE00F025EE /* ChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
@@ -112,14 +112,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4429EA242172186F003BDDF3 /* General */ = {
-			isa = PBXGroup;
-			children = (
-				4429EA25217218BD003BDDF3 /* Toast.swift */,
-			);
-			name = General;
-			sourceTree = "<group>";
-		};
 		443B97B521DA620900B56B40 /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,7 +169,6 @@
 			children = (
 				443B97B621DA621E00B56B40 /* Reminder */,
 				443B97B521DA620900B56B40 /* Contacts */,
-				4429EA242172186F003BDDF3 /* General */,
 				44A3745D20CD7FB6007FF551 /* Measurements */,
 				44A3745C20CD7FAE007FF551 /* Calendar */,
 				44A3745B20CD7FA6007FF551 /* Main */,
@@ -239,6 +230,7 @@
 				441D825121CFC96000D54676 /* Env.swift */,
 				447D8BEC21D62F1E00D523D6 /* MeasurementsCoreData.swift */,
 				447D8BEE21D682B800D523D6 /* ChartSettingsVC.swift */,
+				448134C421ECA1A20075168E /* MeasurementsMenuVC.swift */,
 			);
 			name = Measurements;
 			sourceTree = "<group>";
@@ -361,9 +353,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-BeautyManager/Pods-BeautyManager-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Calendar-iOS/Calendar_iOS.framework",
 				"${BUILT_PRODUCTS_DIR}/CalendarKit/CalendarKit.framework",
-				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/DateToolsSwift/DateToolsSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
 				"${BUILT_PRODUCTS_DIR}/Neon/Neon.framework",
@@ -373,9 +363,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Calendar_iOS.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CalendarKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateToolsSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Neon.framework",
@@ -421,12 +409,12 @@
 				447D8BED21D62F1E00D523D6 /* MeasurementsCoreData.swift in Sources */,
 				44CD117D21D8FFE80000370C /* NewContactVC.swift in Sources */,
 				44B017E820D849CE00F025EE /* ChartData.swift in Sources */,
+				448134C521ECA1A20075168E /* MeasurementsMenuVC.swift in Sources */,
 				446240E321A03AC6004E386F /* Measurement.swift in Sources */,
 				447D8BF121D7C8C500D523D6 /* ShortTipsCoreData.swift in Sources */,
 				446240F321A06E69004E386F /* TipsDetailsVC.swift in Sources */,
 				441D825221CFC96000D54676 /* Env.swift in Sources */,
 				4429EA282173930A003BDDF3 /* UITabBarController.swift in Sources */,
-				4429EA26217218BD003BDDF3 /* Toast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,28 +18,22 @@ class CalendarKit: DayViewController, DatePickerControllerDelegate {
     var dateArray = [Date]()
     var appointments = [Appointment]()
     var appointment: Appointment?
-    
     var colors = [UIColor.blue,
                   UIColor.yellow,
                   UIColor.green,
                   UIColor.red,
                   UIColor.orange,
                   UIColor.magenta]
-    
     let dateFormatter = DateFormatter()
     
     // wczytanie danych z core data
     @objc func loadCalendarDataFromDB() {
         appointments.removeAll()
-        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "AppointmentEntity")
         request.returnsObjectsAsFaults = false
-        
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
-        print("Inside DB.. Reading DB")
         
         // pobranie wszystkich wartości atrybutów z encji
         do {
@@ -74,11 +68,9 @@ class CalendarKit: DayViewController, DatePickerControllerDelegate {
                     isAllDay: isAllDayValue)
                 // dodanie jednej wizyty do tablicy wizyt (do listy)
                 appointments.append(appointment)
-                
                 visitsArray.append([nameValue, addressValue])
                 dateArray.append(dateValue)
             }
-            print(visitsArray)
         } catch {
             print("Failed")
         }
@@ -87,14 +79,12 @@ class CalendarKit: DayViewController, DatePickerControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         visitsArray.removeAll()
         dateArray.removeAll()
-        
         loadCalendarDataFromDB()
         reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Change Date",
                                                            style: .plain,
                                                            target: self,
@@ -119,89 +109,52 @@ class CalendarKit: DayViewController, DatePickerControllerDelegate {
         controller.dismiss(animated: true, completion: nil)
     }
     
-    // MARK: EventDataSource
-    
     override func eventsForDate(_ date: Date) -> [EventDescriptor] {
         visitsArray.removeAll()
         dateArray.removeAll()
-        
         loadCalendarDataFromDB()
-        
         var events = [Event]()
-        
-        print("Count: \(visitsArray.count)")
         
         for i in 0...visitsArray.count-1 {
             let event = Event()
             var visitDate = dateArray[i]
-            
-            print("Visit date: \(visitDate)")
-            
             let duration: Int = Int(appointments[i].duration)!
             var chunk = TimeChunk.dateComponents(minutes: duration)
             let datePeriod = TimePeriod(beginning: visitDate,
                                         chunk: chunk)
-            
             event.startDate = datePeriod.beginning!
             event.endDate = datePeriod.end!
-            
             var info = visitsArray[i]
-            
             event.text = info.reduce("", {$0 + $1 + "\n"})
             event.color = colors[Int(appointments[i].colorNumber)]
             event.isAllDay = appointments[i].isAllDay
             events.append(event)
             event.userInfo = Int(appointments[i].id)
-            print("Event user info: \(event.userInfo)")
         }
-        
         return events
     }
-    
-//    private func textColorForEventInDarkTheme(baseColor: UIColor) -> UIColor {
-//        var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
-//        baseColor.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
-//        return UIColor(hue: h, saturation: s * 0.3, brightness: b, alpha: a)
-//    }
-    
-    // MARK: DayViewDelegate
     
     override func dayViewDidSelectEventView(_ eventView: EventView) {
         guard let descriptor = eventView.descriptor as? Event else {
             return
         }
-        print("Event has been selected: \(descriptor) \(String(describing: descriptor.userInfo))")
     }
     
     override func dayViewDidLongPressEventView(_ eventView: EventView) {
         guard let descriptor = eventView.descriptor as? Event else {
             return
         }
-        
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let dateFromString = dateFormatter.string(from: descriptor.startDate)
-        
         let mainTitle = "\(dateFromString)"
         let question = descriptor.text
         let popupDialog = PopupDialog(title: mainTitle, message: question)
         
-//        var myInt: Int = 0
-//        var string: String = ""
-        
         // BUTTON CANCEL
         let cancelButton = CancelButton(title: "CANCEL") {
         }
-        
         // BUTTON SHOW MORE
         let yesButton = DefaultButton(title: "SHOW MORE", dismissOnTap: true) {
-//            print("User info: \(descriptor.userInfo)")
-//            string = String(describing: descriptor.userInfo)
-//            print("String: \(string)")
-//            myInt = Int(string)!
-//            print("INT: \(myInt)")
-//            self.appointment = self.appointments[1]
-            
-            
             self.tabBarController?.selectedIndex = 0
         }
         popupDialog.addButtons([cancelButton, yesButton])
@@ -209,10 +162,20 @@ class CalendarKit: DayViewController, DatePickerControllerDelegate {
     }
     
     override func dayView(dayView: DayView, willMoveTo date: Date) {
-        print("DayView = \(dayView) will move to: \(date)")
     }
     
     override func dayView(dayView: DayView, didMoveTo date: Date) {
-        print("DayView = \(dayView) did move to: \(date)")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let nav = self.navigationController?.navigationBar
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "testedtested", style: .done, target: self, action: nil)
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        imageView.contentMode = .scaleAspectFit
+        imageView.center = nav!.center
+        let image = UIImage(named: "Colorfull")
+        imageView.image = image
+        navigationItem.titleView = imageView
     }
 }

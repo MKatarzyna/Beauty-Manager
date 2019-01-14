@@ -25,16 +25,12 @@ class CoreDataOperations {
                         isAllDayValue: Bool) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
-        
         let entity = NSEntityDescription.entity(forEntityName: "AppointmentEntity", in: context)
         let newAppointment = NSManagedObject(entity: entity!, insertInto: context)
-        
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let dateFromString = dateFormatter.date(from: dateValue)
         let reminderDateFromString = dateFormatter.date(from: reminderDateValue)
-        
         let newID = findMaximumID() + 1
-        print("NEW ID: \(newID)")
         
         newAppointment.setValue(nameValue, forKey: "name")
         newAppointment.setValue(dateFromString, forKey: "date")
@@ -50,7 +46,6 @@ class CoreDataOperations {
         
         do {
             try context.save()
-            print("saved!")
         }
         catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
@@ -62,10 +57,8 @@ class CoreDataOperations {
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "AppointmentEntity")
         request.returnsObjectsAsFaults = false
-        
         let predicate = NSPredicate(format: "id == \(id)")
         request.predicate = predicate
-        
         let result = try? context.fetch(request)
         let resultData = result as! [AppointmentEntity]
         
@@ -75,7 +68,6 @@ class CoreDataOperations {
         
         do {
             try context.save()
-            print("saved!")
         }
         catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
@@ -97,10 +89,8 @@ class CoreDataOperations {
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "AppointmentEntity")
         request.returnsObjectsAsFaults = false
-        
         let predicate = NSPredicate(format: "id == \(id)")
         request.predicate = predicate
-        
         let result = try? context.fetch(request)
         let resultData = result as! [AppointmentEntity]
         
@@ -122,7 +112,6 @@ class CoreDataOperations {
             
             do {
                 try context.save()
-                print("saved!")
             } catch let error as NSError  {
                 print("Could not save \(error), \(error.userInfo)")
             }
@@ -134,19 +123,17 @@ class CoreDataOperations {
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "AppointmentEntity")
         request.returnsObjectsAsFaults = false
-        
         let result = try? context.fetch(request)
         let resultData = result as! [AppointmentEntity]
-        
         var currentID:Int64 = 0
         var maxID:Int64 = 0
+        
         for object in resultData {
             currentID = object.id
             if currentID > maxID {
                 maxID = currentID
             }
         }
-        //print("MAX ID: \(maxID)")
         return maxID
     }
     
@@ -156,7 +143,6 @@ class CoreDataOperations {
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "AppointmentEntity")
         request.returnsObjectsAsFaults = false
-        
         let result = try? context.fetch(request)
         let resultData = result as! [AppointmentEntity]
         
@@ -166,7 +152,6 @@ class CoreDataOperations {
         
         do {
             try context.save()
-            print("saved!")
         }
         catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")

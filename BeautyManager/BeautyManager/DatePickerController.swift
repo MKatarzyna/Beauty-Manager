@@ -13,7 +13,6 @@ protocol DatePickerControllerDelegate: AnyObject {
 }
 
 class DatePickerController: UIViewController {
-    
     weak var delegate: DatePickerControllerDelegate?
     
     var date: Date {
@@ -53,5 +52,15 @@ class DatePickerController: UIViewController {
     
     @objc func cancelButtonDidTap() {
         delegate?.datePicker(controller: self, didSelect: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let nav = self.navigationController?.navigationBar
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        imageView.contentMode = .scaleAspectFit
+        imageView.center = nav!.center
+        let image = UIImage(named: "Colorfull")
+        imageView.image = image
+        navigationItem.titleView = imageView
     }
 }

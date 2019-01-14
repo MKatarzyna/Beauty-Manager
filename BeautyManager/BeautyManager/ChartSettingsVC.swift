@@ -15,19 +15,14 @@ class ChartSettingsVC: UIViewController, UITextFieldDelegate {
     var chartType: Int64 = 0
     var selectedDate: String = ""
     var array = [(Int, Double)]()
-//    var maxYValue: Double = 0.0
     var maxXValue: Double = 0.0
     var year = ""
     var month = ""
-    
-    
     private var datePicker: UIDatePicker?
     
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
-    
     @IBAction func chooseChartType(_ sender: Any) {
-        
         switch segmentedControl.selectedSegmentIndex
         {
         case 0:
@@ -43,75 +38,55 @@ class ChartSettingsVC: UIViewController, UITextFieldDelegate {
         }
     }
     
-    
     @IBAction func drawChart(_ sender: Any) {
-        
         if (dateTextField.text != "") {
             let date = dateTextField.text
             year = String(date![0...3]) // wycina znaki z indeksem od 0 do 3 ze Stringa date, a następnie przypisuje do nowej zmiennej year (wycinanie roku)
             month = String(date![5...6])    // (wycinanie miesiąca)
             let numday = calculateNumbersOfDays(yearValue: year, monthValue: month)
-            
             maxXValue = Double(numday)
-
             array.removeAll()
             
-            // czyszczenie tab
+            // czyszczenie tablicy
             for i in 0...numday-1  {
                 array.append((0, 0))
             }
-            
-            loadMeasurementsDataFromDB()
 
+            loadMeasurementsDataFromDB()
             array = array.filter { $0 != (0, 0.0) }
-            print(array)
             
             if (array.isEmpty) {
                 self.view.makeToast("No records for that date.", duration: 3.0, position: .bottom)
             } else {
                 performSegue(withIdentifier: "ShowChart", sender: sender)
             }
-            
-
         } else {
             self.view.makeToast("Please, select month and year.", duration: 3.0, position: .bottom)
         }
-        
     }
     
     func calculateNumbersOfDays(yearValue: String, monthValue: String) -> Int {
-        
         var dateComponents = DateComponents()
         dateComponents.year = Int(year)
         dateComponents.month = Int(month)
-        
         let currentCalendarValue = Calendar.current
         let currentDate = currentCalendarValue.date(from: dateComponents)
         let interval = currentCalendarValue.dateInterval(of: .month, for: currentDate!)!
         let numberOfDays = currentCalendarValue.dateComponents([.day], from: interval.start, to: interval.end).day!
-        print(numberOfDays)
-        
         return numberOfDays
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .date
         datePicker?.addTarget(self, action: #selector(BMIViewController.dateChanged(datePicker:)), for: .valueChanged)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(BMIViewController.viewTapped(gestureRecognize:)))
         view.addGestureRecognizer(tapGesture)
         dateTextField.inputView = datePicker
-        
         self.hideKeyboardWhenTappedAround()
-
         self.dateTextField.delegate = self
-        
-//        array = [(1, 2), (2, 1), (3, 9), (4, 7), (5, 10), (6, 9), (7, 15), (8, 8), (9, 70.6), (10, 17), (11, 3), (12, 2), (13, 8), (14, 50.0), (15, 10.1), (16, 10.54), (17, 15), (18, 8), (19, 20), (20, 17), (21, 2), (22, 1), (23, 9), (24, 7), (25, 10), (26, 9), (27, 15), (28, 8), (29, 20), (30, 17)]
-        
         loadMeasurementsDataFromDB()
-        
         dateTextField.text = getCurrentDate()
     }
     
@@ -127,7 +102,6 @@ class ChartSettingsVC: UIViewController, UITextFieldDelegate {
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MeasurementsEntity")
         request.returnsObjectsAsFaults = false
-        
         let dateFormatterForYear = DateFormatter()
         dateFormatterForYear.dateFormat = "yyyy"
         let dateFormatterForMonth = DateFormatter()
@@ -143,25 +117,18 @@ class ChartSettingsVC: UIViewController, UITextFieldDelegate {
                 let weightValue = data.value(forKey: "weight") as! Double
                 let resultBmiValue = data.value(forKey: "resultBMI") as! Double
                 let dateValue = data.value(forKey: "date") as! Date
-                
                 let yearDate = dateFormatterForYear.string(from: dateValue)
                 let monthDate = dateFormatterForMonth.string(from: dateValue)
                 let dayDate: Int = Int(dateFormatterForDay.string(from: dateValue))!
-//                print("YearDate: \(yearDate), MonthDate: \(monthDate), DayDate: \(dayDate)")
                 
                 if(yearDate == year && monthDate == month){
                     print("YearDate: \(yearDate), MonthDate: \(monthDate), DayDate: \(dayDate)")
-                    
                     if (chartType == 0) {
-//                        array.append((dayDate, weightValue))
                         array.insert((dayDate, weightValue), at: dayDate-1)
                     } else if (chartType == 1) {
-//                        array.append((dayDate, resultBmiValue))
                         array.insert((dayDate, resultBmiValue), at: dayDate-1)
                     }
-
                 }
-                
             }
         } catch {
             print("Failed")
@@ -175,7 +142,6 @@ class ChartSettingsVC: UIViewController, UITextFieldDelegate {
 
     // zabezpieczenie datePickera przed wklejaniem tresci i dodawaniem innych znaków niż te podane poprzez dataPicker
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
         if textField == dateTextField {
             return false
         }
@@ -184,7 +150,6 @@ class ChartSettingsVC: UIViewController, UITextFieldDelegate {
         }
     }
     
-    // handler method
     @objc func viewTapped(gestureRecognize: UITapGestureRecognizer) {
         view.endEditing(true)
     }
@@ -208,12 +173,20 @@ class ChartSettingsVC: UIViewController, UITextFieldDelegate {
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        let nav = self.navigationController?.navigationBar
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: ".", style: .done, target: self, action: nil)
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        imageView.contentMode = .scaleAspectFit
+        imageView.center = nav!.center
+        let image = UIImage(named: "Colorfull")
+        imageView.image = image
+        navigationItem.titleView = imageView
+    }
 }
 
 extension String {
-//    subscript (i: Int) -> Character {
-//        return self[index(startIndex, offsetBy: i)]
-//    }
     subscript (bounds: CountableClosedRange<Int>) -> Substring {
         let start = index(startIndex, offsetBy: bounds.lowerBound)
         let end = index(startIndex, offsetBy: bounds.upperBound)
@@ -221,9 +194,6 @@ extension String {
     }
 }
 extension Substring {
-//    subscript (i: Int) -> Character {
-//        return self[index(startIndex, offsetBy: i)]
-//    }
     subscript (bounds: CountableClosedRange<Int>) -> Substring {
         let start = index(startIndex, offsetBy: bounds.lowerBound)
         let end = index(startIndex, offsetBy: bounds.upperBound)
