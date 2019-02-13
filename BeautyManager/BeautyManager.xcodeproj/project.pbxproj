@@ -27,7 +27,6 @@
 		444B3FAD20B0B41A005E0266 /* Tips.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 444B3FAC20B0B41A005E0266 /* Tips.storyboard */; };
 		444B3FAF20B0B47F005E0266 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 444B3FAE20B0B47F005E0266 /* Calendar.storyboard */; };
 		444B3FB120B0B5DD005E0266 /* Measurements.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 444B3FB020B0B5DD005E0266 /* Measurements.storyboard */; };
-		444B3FB520B17F2B005E0266 /* twarz_przycisk.png in Resources */ = {isa = PBXBuildFile; fileRef = 444B3FB420B17F2B005E0266 /* twarz_przycisk.png */; };
 		446240E121A03A9E004E386F /* Tip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446240E021A03A9E004E386F /* Tip.swift */; };
 		446240E321A03AC6004E386F /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446240E221A03AC6004E386F /* Measurement.swift */; };
 		446240E921A04D89004E386F /* TipsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446240E821A04D89004E386F /* TipsTableVC.swift */; };
@@ -77,7 +76,6 @@
 		444B3FAC20B0B41A005E0266 /* Tips.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tips.storyboard; sourceTree = "<group>"; };
 		444B3FAE20B0B47F005E0266 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		444B3FB020B0B5DD005E0266 /* Measurements.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Measurements.storyboard; sourceTree = "<group>"; };
-		444B3FB420B17F2B005E0266 /* twarz_przycisk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twarz_przycisk.png; sourceTree = "<group>"; };
 		446240E021A03A9E004E386F /* Tip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tip.swift; sourceTree = "<group>"; };
 		446240E221A03AC6004E386F /* Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
 		446240E821A04D89004E386F /* TipsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsTableVC.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -185,7 +183,6 @@
 		44A3745A20CD7F9E007FF551 /* Tips */ = {
 			isa = PBXGroup;
 			children = (
-				444B3FB420B17F2B005E0266 /* twarz_przycisk.png */,
 				444B3FAC20B0B41A005E0266 /* Tips.storyboard */,
 				446240E021A03A9E004E386F /* Tip.swift */,
 				446240E821A04D89004E386F /* TipsTableVC.swift */,
@@ -317,7 +314,6 @@
 				444B3F8520B08072005E0266 /* LaunchScreen.storyboard in Resources */,
 				444B3FAD20B0B41A005E0266 /* Tips.storyboard in Resources */,
 				4468CF6321B839810028A1C2 /* TipsAssets.bundle in Resources */,
-				444B3FB520B17F2B005E0266 /* twarz_przycisk.png in Resources */,
 				444B3FAB20B08D57005E0266 /* Planner.storyboard in Resources */,
 				444B3F8220B08072005E0266 /* Assets.xcassets in Resources */,
 				444B3F7D20B08072005E0266 /* Main.storyboard in Resources */,

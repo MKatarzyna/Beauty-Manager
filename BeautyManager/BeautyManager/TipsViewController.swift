@@ -11,9 +11,6 @@ import UIKit
 class TipsViewController: UIViewController {
     var category:String = ""
 
-    @IBAction func sendDataFromFaceCategory(_ sender: Any) {
-        category = "Face"
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
     }

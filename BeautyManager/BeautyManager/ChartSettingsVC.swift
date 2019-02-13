@@ -22,6 +22,7 @@ class ChartSettingsVC: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
     @IBAction func chooseChartType(_ sender: Any) {
         switch segmentedControl.selectedSegmentIndex
         {
@@ -161,7 +162,6 @@ class ChartSettingsVC: UIViewController, UITextFieldDelegate {
         selectedDate = dateTextField.text!
     }
     
-    // wysłanie elementu z tablicy appointments dla zaznaczonego wiersza
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? ChartData {
             destination.chartType = chartType
